@@ -199,42 +199,6 @@ arma::mat createBasis (const arma::vec& values, const unsigned int& degree,
   return spline_basis;
 }
 
-// //' Transformation from a vector of input points to sparse matrix of basis
-// //' 
-// //' This functions takes a vector of points and create a sparse matrix of
-// //' basis functions. Each row contains the basis of the corresponding value 
-// //' in `values`.
-// //' 
-// //' @param values `arma::vec` Points to create the basis matrix.
-// //' @param n_knots `unsigned int` Number of innter knots.
-// //' @param degree `unsigned int` polynomial degree of splines.
-// //'    
-// //' @return `arma::mat` dense matrix of base functions.
-// //' @examples
-// //' nsim = 100
-// //' 
-// //' x = sort(runif(nsim, 0, 10))
-// //' y = 2 * sin(x) + rnorm(nsim, 0, 0.5) 
-// //' knots = createKnots(values = x, n_knots = 20, degree = 3)
-// //'
-// //' # Create spline basis:
-// //' basis = createBasis(values = x, degree = 3, knots = knots)
-// //' @export
-// // [[Rcpp::export]]
-// arma::mat createBasis (const arma::vec& values, const unsigned int& degree, 
-//   const arma::vec& knots)
-// {
-//   // Frame for output:
-//   arma::mat spline_basis(values.size(), knots.size() - (degree + 1), arma::fill::zeros);
-  
-//   // Fill frame with functions:
-//   for (unsigned int i = 0; i < values.size(); i++) {
-//     spline_basis.row(i) = basisFuns(values[i], degree, knots);
-//   }  
-//   return spline_basis;
-// }
-
-
 //' Transformation from a vector of input points to sparse matrix of basis
 //' 
 //' This functions takes a vector of points and create a sparse matrix of
