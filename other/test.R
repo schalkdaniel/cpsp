@@ -64,7 +64,7 @@ x = sort(runif(nsim, 0, 10))
 y = 2 * sin(x) + rnorm(nsim, 0, 0.5)
 
 # Create spline basis:
-knots = createKnots(values = x, n_knots = 100, degree = 3)
+knots = createKnots(values = x, n_knots = 20, degree = 3)
 
 X = createBasis(values = x, degree = 3, knots = knots)
 X.sparse = createSparseBasis(values = x, degree = 3, knots = knots)
@@ -80,6 +80,28 @@ all.equal(X, X.sparse.dense)
 	"sparse" = createSparseBasis(values = x, degree = 3, knots = knots), 
 	times = 10L
 ))
+
+dense.crossprod = "
+arma::mat denseCrossprod (arma::mat& X)
+{
+	return X.t() * X;
+}
+"
+sparse.crossprod = "
+arma::sp_mat sparseCrossprod (arma::sp_mat& X)
+{
+	return X.t() * X;
+}
+"
+Rcpp::cppFunction(code = dense.crossprod, depends = "RcppArmadillo")
+Rcpp::cppFunction(code = sparse.crossprod, depends = "RcppArmadillo")
+
+(bm = microbenchmark::microbenchmark(
+	"dense crossprod" = createBasis(values = x, degree = 3, knots = knots),
+	"sparse crossprod" = createSparseBasis(values = x, degree = 3, knots = knots), 
+	times = 10L
+))
+
 
 plot(bm)
 

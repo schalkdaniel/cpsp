@@ -7,6 +7,8 @@ test_that("splines can be computed", {
   x = sort(runif(nsim, 0, 10))
   y = 2 * sin(x) + rnorm(nsim, 0, 0.5)
 
+  expect_silent(penaltyMat(10, 2))
+
   expect_silent({
     knots = createKnots(values = x, n_knots = 100, degree = 3)
   })
