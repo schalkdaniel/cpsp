@@ -1,4 +1,4 @@
-Package: compsplines
+Package: compboostSplines
 Type: Package
 Title: C++ Spline Implementation of compboost
 Version: 0.1
