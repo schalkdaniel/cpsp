@@ -18,5 +18,6 @@ LinkingTo:
     Rcpp,
     RcppArmadillo
 Suggests:
-    testthat
+    testthat,
+    knitr
 VignetteBuilder: knitr
