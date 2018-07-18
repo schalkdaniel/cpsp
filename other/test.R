@@ -5,7 +5,6 @@ y = 2 * sin(x) + rnorm(nsim, 0, 0.5)
 
 # Create spline basis:
 knots = createKnots(values = x, n_knots = 20, degree = 3)
-basisFuns(x = x[30], degree = 3, knots = knots)
 basis = createBasis(values = x, degree = 3, knots = knots)
 
 # Check if row sums add up to 1:
@@ -59,13 +58,13 @@ ggplot() + geom_point(data = plot.df, mapping = aes(x = x, y = y)) +
 
 # Test sparse matrices:
 
-nsim = 10000
+nsim = 100000
 
 x = sort(runif(nsim, 0, 10))
 y = 2 * sin(x) + rnorm(nsim, 0, 0.5)
 
 # Create spline basis:
-knots = createKnots(values = x, n_knots = 20, degree = 3)
+knots = createKnots(values = x, n_knots = 100, degree = 3)
 
 X = createBasis(values = x, degree = 3, knots = knots)
 X.sparse = createSparseBasis(values = x, degree = 3, knots = knots)
@@ -78,11 +77,9 @@ all.equal(X, X.sparse.dense)
 
 (bm = microbenchmark::microbenchmark(
 	"dense" = createBasis(values = x, degree = 3, knots = knots),
-	"sparse" = sparseBasisFuns(values = x, degree = 3, knots = knots), 
+	"sparse" = createSparseBasis(values = x, degree = 3, knots = knots), 
 	times = 10L
 ))
-
-
 
 plot(bm)
 

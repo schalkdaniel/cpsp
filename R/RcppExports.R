@@ -42,28 +42,6 @@ findSpan <- function(x, knots) {
     .Call(`_compboostSplines_findSpan`, x, knots)
 }
 
-#' De Boors algorithm to find basis functions
-#' 
-#' @param x `double` Point to search for position in knots.
-#' @param degree `unsigned int` Degree of the polynomial between the knots.
-#' @param knots `arma::vec` Vector of knots. It's the users responsibility to
-#'   pass a **SORTED** vector.
-#'   
-#' @return `arma::mat` dense matrix containing the basis functions.
-#' @examples
-#' x = sort(runif(100, 0, 10))
-#' y = 2 * sin(x) + rnorm(100, 0, 0.5)
-#' 
-#' # Create knots on the space of x:
-#' knots = createKnots(values = x, n_knots = 7, degree = 3)
-#' 
-#' # Create basis functions for one value:
-#' basisFuns(x = x[30], degree = 3, knots = knots)
-#' @export
-basisFuns <- function(x, degree, knots) {
-    .Call(`_compboostSplines_basisFuns`, x, degree, knots)
-}
-
 #' Create knots for a specific number, degree and values
 #' 
 #' This functions takes a vector of points and creates knots used for the
@@ -86,26 +64,23 @@ createKnots <- function(values, n_knots, degree) {
     .Call(`_compboostSplines_createKnots`, values, n_knots, degree)
 }
 
-#' Transformation from a vector of input points to sparse matrix of basis
+#' De Boors algorithm to find basis functions
 #' 
-#' This functions takes a vector of points and create a sparse matrix of
-#' basis functions. Each row contains the basis of the corresponding value 
-#' in `values`.
-#' 
-#' @param values `arma::vec` Points to create the basis matrix.
-#' @param n_knots `unsigned int` Number of innter knots.
-#' @param degree `unsigned int` polynomial degree of splines.
-#'    
-#' @return `arma::mat` dense matrix of base functions.
+#' @param x `double` Point to search for position in knots.
+#' @param degree `unsigned int` Degree of the polynomial between the knots.
+#' @param knots `arma::vec` Vector of knots. It's the users responsibility to
+#'   pass a **SORTED** vector.
+#'   
+#' @return `arma::mat` dense matrix containing the basis functions.
 #' @examples
-#' nsim = 100
+#' x = sort(runif(100, 0, 10))
+#' y = 2 * sin(x) + rnorm(100, 0, 0.5)
 #' 
-#' x = sort(runif(nsim, 0, 10))
-#' y = 2 * sin(x) + rnorm(nsim, 0, 0.5) 
-#' knots = createKnots(values = x, n_knots = 20, degree = 3)
-#'
-#' # Create spline basis:
-#' basis = createBasis(values = x, degree = 3, knots = knots)
+#' # Create knots on the space of x:
+#' knots = createKnots(values = x, n_knots = 7, degree = 3)
+#' 
+#' # Create basis functions for one value:
+#' basisFuns(x = x[30], degree = 3, knots = knots)
 #' @export
 createBasis <- function(values, degree, knots) {
     .Call(`_compboostSplines_createBasis`, values, degree, knots)
