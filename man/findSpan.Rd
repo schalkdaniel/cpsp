@@ -14,11 +14,6 @@ pass a **SORTED** vector.}
 }
 \value{
 `unsigned int` of position of `x` in `knots`.
-knots = 1:10
-findSpan(1, knots)
-findSpan(2.5, knots)
-findSpan(9.5, knots)
-findSpan(10, knots)
 }
 \description{
 This small functions search for the position of `x` within the
@@ -27,4 +22,11 @@ This small functions search for the position of `x` within the
 \details{
 Note that this function returns the `C++` index which starts 
 with `0` and ends with `n-1`.
+}
+\examples{
+knots = 1:10
+findSpan(1, knots)
+findSpan(2.5, knots)
+findSpan(9.5, knots)
+findSpan(10, knots)
 }

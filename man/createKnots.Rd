@@ -21,3 +21,10 @@ This functions takes a vector of points and creates knots used for the
 splines depending on the number of knots and degree. This function just
 handles equidistant knots.
 }
+\examples{
+x = sort(runif(100, 0, 10))
+y = 2 * sin(x) + rnorm(100, 0, 0.5)
+
+# Create knots on the space of x:
+knots = createKnots(values = x, n_knots = 7, degree = 3)
+}

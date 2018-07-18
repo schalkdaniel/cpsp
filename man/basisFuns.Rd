@@ -15,8 +15,18 @@ basisFuns(x, degree, knots)
 pass a **SORTED** vector.}
 }
 \value{
-`arma::sp_mat` Sparse matrix containing the basis functions.
+`arma::mat` dense matrix containing the basis functions.
 }
 \description{
 De Boors algorithm to find basis functions
+}
+\examples{
+x = sort(runif(100, 0, 10))
+y = 2 * sin(x) + rnorm(100, 0, 0.5)
+
+# Create knots on the space of x:
+knots = createKnots(values = x, n_knots = 7, degree = 3)
+
+# Create basis functions for one value:
+basisFuns(x = x[30], degree = 3, knots = knots)
 }

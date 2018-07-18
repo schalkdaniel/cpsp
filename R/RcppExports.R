@@ -16,7 +16,7 @@
 #' pen = penaltyMat(10, 2)
 #' @export
 penaltyMat <- function(nparams, differences) {
-    .Call('_compboost_splines_penaltyMat', PACKAGE = 'compboost_splines', nparams, differences)
+    .Call(`_compboostSplines_penaltyMat`, nparams, differences)
 }
 
 #' Binary search to find index of given point within knots
@@ -26,12 +26,12 @@ penaltyMat <- function(nparams, differences) {
 #' 
 #' Note that this function returns the `C++` index which starts 
 #' with `0` and ends with `n-1`.
-#' 
+#'
 #' @param x `double` Point to search for position in knots.
 #' @param knots `arma::vec` Vector of knots. It's the users responsibility to
 #'   pass a **SORTED** vector.
-#'   
 #' @return `unsigned int` of position of `x` in `knots`.
+#' @examples
 #' knots = 1:10
 #' findSpan(1, knots)
 #' findSpan(2.5, knots)
@@ -39,7 +39,7 @@ penaltyMat <- function(nparams, differences) {
 #' findSpan(10, knots)
 #' @export
 findSpan <- function(x, knots) {
-    .Call('_compboost_splines_findSpan', PACKAGE = 'compboost_splines', x, knots)
+    .Call(`_compboostSplines_findSpan`, x, knots)
 }
 
 #' De Boors algorithm to find basis functions
@@ -49,10 +49,19 @@ findSpan <- function(x, knots) {
 #' @param knots `arma::vec` Vector of knots. It's the users responsibility to
 #'   pass a **SORTED** vector.
 #'   
-#' @return `arma::sp_mat` Sparse matrix containing the basis functions.
+#' @return `arma::mat` dense matrix containing the basis functions.
+#' @examples
+#' x = sort(runif(100, 0, 10))
+#' y = 2 * sin(x) + rnorm(100, 0, 0.5)
+#' 
+#' # Create knots on the space of x:
+#' knots = createKnots(values = x, n_knots = 7, degree = 3)
+#' 
+#' # Create basis functions for one value:
+#' basisFuns(x = x[30], degree = 3, knots = knots)
 #' @export
 basisFuns <- function(x, degree, knots) {
-    .Call('_compboost_splines_basisFuns', PACKAGE = 'compboost_splines', x, degree, knots)
+    .Call(`_compboostSplines_basisFuns`, x, degree, knots)
 }
 
 #' Create knots for a specific number, degree and values
@@ -66,9 +75,15 @@ basisFuns <- function(x, degree, knots) {
 #' @param degree `unsigned int` polynomial degree of splines.
 #'    
 #' @return `arma::vec` of knots.
+#' @examples
+#' x = sort(runif(100, 0, 10))
+#' y = 2 * sin(x) + rnorm(100, 0, 0.5)
+#' 
+#' # Create knots on the space of x:
+#' knots = createKnots(values = x, n_knots = 7, degree = 3)
 #' @export
 createKnots <- function(values, n_knots, degree) {
-    .Call('_compboost_splines_createKnots', PACKAGE = 'compboost_splines', values, n_knots, degree)
+    .Call(`_compboostSplines_createKnots`, values, n_knots, degree)
 }
 
 #' Transformation from a vector of input points to sparse matrix of basis
@@ -81,9 +96,47 @@ createKnots <- function(values, n_knots, degree) {
 #' @param n_knots `unsigned int` Number of innter knots.
 #' @param degree `unsigned int` polynomial degree of splines.
 #'    
-#' @return `sp_mat` sparse matrix of base functions.
+#' @return `arma::mat` dense matrix of base functions.
+#' @examples
+#' nsim = 100
+#' 
+#' x = sort(runif(nsim, 0, 10))
+#' y = 2 * sin(x) + rnorm(nsim, 0, 0.5) 
+#' knots = createKnots(values = x, n_knots = 20, degree = 3)
+#'
+#' # Create spline basis:
+#' basis = createBasis(values = x, degree = 3, knots = knots)
 #' @export
 createBasis <- function(values, degree, knots) {
-    .Call('_compboost_splines_createBasis', PACKAGE = 'compboost_splines', values, degree, knots)
+    .Call(`_compboostSplines_createBasis`, values, degree, knots)
+}
+
+#' Transformation from a vector of input points to sparse matrix of basis
+#' 
+#' This functions takes a vector of points and create a sparse matrix of
+#' basis functions. Each row contains the basis of the corresponding value 
+#' in `values`.
+#'
+#' Instead of calculating each row through a helper function we directly 
+#' calculate deboors algorithm here. This is due to the procedure how 
+#' sparse matrices should be allocated and constructed.
+#' 
+#' @param values `arma::vec` Points to create the basis matrix.
+#' @param n_knots `unsigned int` Number of innter knots.
+#' @param degree `unsigned int` polynomial degree of splines.
+#'    
+#' @return `arma::sp_mat` sparse matrix of base functions.
+#' @examples
+#' nsim = 100
+#' 
+#' x = sort(runif(nsim, 0, 10))
+#' y = 2 * sin(x) + rnorm(nsim, 0, 0.5) 
+#' knots = createKnots(values = x, n_knots = 20, degree = 3)
+#'
+#' # Create spline basis:
+#' basis = createSparseBasis(values = x, degree = 3, knots = knots)
+#' @export
+createSparseBasis <- function(values, degree, knots) {
+    .Call(`_compboostSplines_createSparseBasis`, values, degree, knots)
 }
 

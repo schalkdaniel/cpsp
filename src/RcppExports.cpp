@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // penaltyMat
 arma::mat penaltyMat(const unsigned int& nparams, const unsigned int& differences);
-RcppExport SEXP _compboost_splines_penaltyMat(SEXP nparamsSEXP, SEXP differencesSEXP) {
+RcppExport SEXP _compboostSplines_penaltyMat(SEXP nparamsSEXP, SEXP differencesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +20,7 @@ END_RCPP
 }
 // findSpan
 unsigned int findSpan(const double& x, const arma::vec& knots);
-RcppExport SEXP _compboost_splines_findSpan(SEXP xSEXP, SEXP knotsSEXP) {
+RcppExport SEXP _compboostSplines_findSpan(SEXP xSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,7 +32,7 @@ END_RCPP
 }
 // basisFuns
 arma::rowvec basisFuns(const double& x, const unsigned int& degree, const arma::vec& knots);
-RcppExport SEXP _compboost_splines_basisFuns(SEXP xSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
+RcppExport SEXP _compboostSplines_basisFuns(SEXP xSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -45,7 +45,7 @@ END_RCPP
 }
 // createKnots
 arma::vec createKnots(const arma::vec& values, const unsigned int& n_knots, const unsigned int& degree);
-RcppExport SEXP _compboost_splines_createKnots(SEXP valuesSEXP, SEXP n_knotsSEXP, SEXP degreeSEXP) {
+RcppExport SEXP _compboostSplines_createKnots(SEXP valuesSEXP, SEXP n_knotsSEXP, SEXP degreeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -58,7 +58,7 @@ END_RCPP
 }
 // createBasis
 arma::mat createBasis(const arma::vec& values, const unsigned int& degree, const arma::vec& knots);
-RcppExport SEXP _compboost_splines_createBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
+RcppExport SEXP _compboostSplines_createBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -69,17 +69,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// createSparseBasis
+arma::sp_mat createSparseBasis(arma::vec& values, const unsigned int& degree, const arma::vec& knots);
+RcppExport SEXP _compboostSplines_createSparseBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec& >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< const unsigned int& >::type degree(degreeSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type knots(knotsSEXP);
+    rcpp_result_gen = Rcpp::wrap(createSparseBasis(values, degree, knots));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_compboost_splines_penaltyMat", (DL_FUNC) &_compboost_splines_penaltyMat, 2},
-    {"_compboost_splines_findSpan", (DL_FUNC) &_compboost_splines_findSpan, 2},
-    {"_compboost_splines_basisFuns", (DL_FUNC) &_compboost_splines_basisFuns, 3},
-    {"_compboost_splines_createKnots", (DL_FUNC) &_compboost_splines_createKnots, 3},
-    {"_compboost_splines_createBasis", (DL_FUNC) &_compboost_splines_createBasis, 3},
+    {"_compboostSplines_penaltyMat", (DL_FUNC) &_compboostSplines_penaltyMat, 2},
+    {"_compboostSplines_findSpan", (DL_FUNC) &_compboostSplines_findSpan, 2},
+    {"_compboostSplines_basisFuns", (DL_FUNC) &_compboostSplines_basisFuns, 3},
+    {"_compboostSplines_createKnots", (DL_FUNC) &_compboostSplines_createKnots, 3},
+    {"_compboostSplines_createBasis", (DL_FUNC) &_compboostSplines_createBasis, 3},
+    {"_compboostSplines_createSparseBasis", (DL_FUNC) &_compboostSplines_createSparseBasis, 3},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_compboost_splines(DllInfo *dll) {
+RcppExport void R_init_compboostSplines(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
