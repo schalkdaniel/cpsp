@@ -48,7 +48,7 @@ arma::mat penaltyMat (const unsigned int& nparams, const unsigned int& differenc
 //' Note that this function returns the `C++` index which starts 
 //' with `0` and ends with `n-1`.
 //'
-//' @param x [\code{numeric(1)]\cr 
+//' @param x [\code{numeric(1)}]\cr 
 //'   Point to search for position in knots.
 //' @param knots [\code{numeric}]\cr 
 //'   Vector of knots. It's the users responsibility to pass a sorted vector.
@@ -88,7 +88,7 @@ unsigned int findSpan (const double& x, const arma::vec& knots)
 //' splines depending on the number of knots and degree. This function just
 //' handles equidistant knots.
 //' 
-//' @param values [\code{numeric}}\cr 
+//' @param values [\code{numeric}]\cr 
 //'   Points to create the basis matrix.
 //' @param n_knots [\code{integer(1)}]\cr 
 //'   Number of innter knots.
@@ -134,9 +134,9 @@ arma::vec createKnots (const arma::vec& values, const unsigned int& n_knots,
 //' basis functions. Each row contains the basis of the corresponding value 
 //' in `values`.
 //' 
-//' @param values [\code{numeric}}\cr 
+//' @param values [\code{numeric}]\cr 
 //'   Points to create the basis matrix.
-//' @param degree [\code{integer(1)]}\cr 
+//' @param degree [\code{integer(1)}]\cr 
 //'   Polynomial degree of splines.
 //' @param knots [\code{numeric}]\cr 
 //'   Vector of knots on which the splines are computed.
@@ -212,9 +212,9 @@ arma::mat createBasis (const arma::vec& values, const unsigned int& degree,
 //' basis functions. Each row contains the basis of the corresponding value 
 //' in `values`.
 //' 
-//' @param values [\code{numeric}}\cr 
+//' @param values [\code{numeric}]\cr 
 //'   Points to create the basis matrix.
-//' @param degree [\code{integer(1)]}\cr 
+//' @param degree [\code{integer(1)}]\cr 
 //'   Polynomial degree of splines.
 //' @param knots [\code{numeric}]\cr 
 //'   Vector of knots on which the splines are computed.

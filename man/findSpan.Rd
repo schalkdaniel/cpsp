@@ -7,6 +7,9 @@
 findSpan(x, knots)
 }
 \arguments{
+\item{x}{[\code{numeric(1)}]\cr 
+Point to search for position in knots.}
+
 \item{knots}{[\code{numeric}]\cr 
 Vector of knots. It's the users responsibility to pass a sorted vector.}
 }

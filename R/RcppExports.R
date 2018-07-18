@@ -27,7 +27,7 @@ penaltyMat <- function(nparams, differences) {
 #' Note that this function returns the `C++` index which starts 
 #' with `0` and ends with `n-1`.
 #'
-#' @param x [\code{numeric(1)]\cr 
+#' @param x [\code{numeric(1)}]\cr 
 #'   Point to search for position in knots.
 #' @param knots [\code{numeric}]\cr 
 #'   Vector of knots. It's the users responsibility to pass a sorted vector.
@@ -49,7 +49,7 @@ findSpan <- function(x, knots) {
 #' splines depending on the number of knots and degree. This function just
 #' handles equidistant knots.
 #' 
-#' @param values [\code{numeric}}\cr 
+#' @param values [\code{numeric}]\cr 
 #'   Points to create the basis matrix.
 #' @param n_knots [\code{integer(1)}]\cr 
 #'   Number of innter knots.
@@ -73,9 +73,9 @@ createKnots <- function(values, n_knots, degree) {
 #' basis functions. Each row contains the basis of the corresponding value 
 #' in `values`.
 #' 
-#' @param values [\code{numeric}}\cr 
+#' @param values [\code{numeric}]\cr 
 #'   Points to create the basis matrix.
-#' @param degree [\code{integer(1)]}\cr 
+#' @param degree [\code{integer(1)}]\cr 
 #'   Polynomial degree of splines.
 #' @param knots [\code{numeric}]\cr 
 #'   Vector of knots on which the splines are computed.
@@ -99,9 +99,9 @@ createBasis <- function(values, degree, knots) {
 #' basis functions. Each row contains the basis of the corresponding value 
 #' in `values`.
 #' 
-#' @param values [\code{numeric}}\cr 
+#' @param values [\code{numeric}]\cr 
 #'   Points to create the basis matrix.
-#' @param degree [\code{integer(1)]}\cr 
+#' @param degree [\code{integer(1)}]\cr 
 #'   Polynomial degree of splines.
 #' @param knots [\code{numeric}]\cr 
 #'   Vector of knots on which the splines are computed.

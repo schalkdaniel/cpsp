@@ -7,6 +7,9 @@
 createKnots(values, n_knots, degree)
 }
 \arguments{
+\item{values}{[\code{numeric}]\cr 
+Points to create the basis matrix.}
+
 \item{n_knots}{[\code{integer(1)}]\cr 
 Number of innter knots.}
 

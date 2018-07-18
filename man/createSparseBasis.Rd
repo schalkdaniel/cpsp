@@ -7,7 +7,10 @@
 createSparseBasis(values, degree, knots)
 }
 \arguments{
-\item{degree}{[\code{integer(1)]}\cr 
+\item{values}{[\code{numeric}]\cr 
+Points to create the basis matrix.}
+
+\item{degree}{[\code{integer(1)}]\cr 
 Polynomial degree of splines.}
 
 \item{knots}{[\code{numeric}]\cr 
