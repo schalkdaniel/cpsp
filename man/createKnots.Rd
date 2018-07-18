@@ -7,14 +7,14 @@
 createKnots(values, n_knots, degree)
 }
 \arguments{
-\item{values}{`arma::vec` Points to create the basis matrix.}
+\item{n_knots}{[\code{integer(1)}]\cr 
+Number of innter knots.}
 
-\item{n_knots}{`unsigned int` Number of innter knots.}
-
-\item{degree}{`unsigned int` polynomial degree of splines.}
+\item{degree}{[\code{integer(1)]}\cr 
+Polynomial degree of splines.}
 }
 \value{
-`arma::vec` of knots.
+Vector of knots.
 }
 \description{
 This functions takes a vector of points and creates knots used for the

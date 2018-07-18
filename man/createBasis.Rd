@@ -2,31 +2,31 @@
 % Please edit documentation in R/RcppExports.R
 \name{createBasis}
 \alias{createBasis}
-\title{De Boors algorithm to find basis functions}
+\title{Transformation from a vector of input points to dense matrix of basis}
 \usage{
 createBasis(values, degree, knots)
 }
 \arguments{
-\item{degree}{`unsigned int` Degree of the polynomial between the knots.}
+\item{degree}{[\code{integer(1)]}\cr 
+Polynomial degree of splines.}
 
-\item{knots}{`arma::vec` Vector of knots. It's the users responsibility to
-pass a **SORTED** vector.}
-
-\item{x}{`double` Point to search for position in knots.}
+\item{knots}{[\code{numeric}]\cr 
+Vector of knots on which the splines are computed.}
 }
 \value{
-`arma::mat` dense matrix containing the basis functions.
+Vector of knots.
 }
 \description{
-De Boors algorithm to find basis functions
+This functions takes a vector of points and create a sparse matrix of
+basis functions. Each row contains the basis of the corresponding value 
+in `values`.
 }
 \examples{
-x = sort(runif(100, 0, 10))
-y = 2 * sin(x) + rnorm(100, 0, 0.5)
+nsim = 100
+x = sort(runif(nsim, 0, 10))
+y = 2 * sin(x) + rnorm(nsim, 0, 0.5) 
+knots = createKnots(values = x, n_knots = 20, degree = 3)
 
-# Create knots on the space of x:
-knots = createKnots(values = x, n_knots = 7, degree = 3)
-
-# Create basis functions for one value:
-basisFuns(x = x[30], degree = 3, knots = knots)
+# Create spline basis:
+basis = createBasis(values = x, degree = 3, knots = knots)
 }

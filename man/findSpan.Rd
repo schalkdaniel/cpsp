@@ -7,13 +7,11 @@
 findSpan(x, knots)
 }
 \arguments{
-\item{x}{`double` Point to search for position in knots.}
-
-\item{knots}{`arma::vec` Vector of knots. It's the users responsibility to
-pass a **SORTED** vector.}
+\item{knots}{[\code{numeric}]\cr 
+Vector of knots. It's the users responsibility to pass a sorted vector.}
 }
 \value{
-`unsigned int` of position of `x` in `knots`.
+Index of position of \code{x} in `knots`.
 }
 \description{
 This small functions search for the position of `x` within the

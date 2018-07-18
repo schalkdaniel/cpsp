@@ -7,28 +7,22 @@
 createSparseBasis(values, degree, knots)
 }
 \arguments{
-\item{values}{`arma::vec` Points to create the basis matrix.}
+\item{degree}{[\code{integer(1)]}\cr 
+Polynomial degree of splines.}
 
-\item{degree}{`unsigned int` polynomial degree of splines.}
-
-\item{n_knots}{`unsigned int` Number of innter knots.}
+\item{knots}{[\code{numeric}]\cr 
+Vector of knots on which the splines are computed.}
 }
 \value{
-`arma::sp_mat` sparse matrix of base functions.
+Vector of knots.
 }
 \description{
 This functions takes a vector of points and create a sparse matrix of
 basis functions. Each row contains the basis of the corresponding value 
 in `values`.
 }
-\details{
-Instead of calculating each row through a helper function we directly 
-calculate deboors algorithm here. This is due to the procedure how 
-sparse matrices should be allocated and constructed.
-}
 \examples{
 nsim = 100
-
 x = sort(runif(nsim, 0, 10))
 y = 2 * sin(x) + rnorm(nsim, 0, 0.5) 
 knots = createKnots(values = x, n_knots = 20, degree = 3)

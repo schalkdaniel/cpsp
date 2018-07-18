@@ -8,12 +8,12 @@
 //' This function calculates the penalty matrix for a given number of 
 //' parameters (`nparams`) and a given number of differences (`differences`).
 //' 
-//' @param nparams `unsigned int` Number of params which should be penalized.
+//' @param nparams [\code{integer(1)}]\cr 
+//'   Number of params which should be penalized.
 //'   This also pretend the number of rows and columns.
-//'   
-//' @param differences `unsigned int` Number of penalized differences.
-//' 
-//' @return `arma::sp_mat` Sparse penalty matrix used for p splines. 
+//' @param differences [\code{integer(1)}]\cr 
+//'   Number of penalized differences.//' 
+//' @return \code{arma::sp_mat} Sparse penalty matrix used for p splines. 
 //' @examples
 //' pen = penaltyMat(10, 2)
 //' @export
@@ -48,10 +48,11 @@ arma::mat penaltyMat (const unsigned int& nparams, const unsigned int& differenc
 //' Note that this function returns the `C++` index which starts 
 //' with `0` and ends with `n-1`.
 //'
-//' @param x `double` Point to search for position in knots.
-//' @param knots `arma::vec` Vector of knots. It's the users responsibility to
-//'   pass a **SORTED** vector.
-//' @return `unsigned int` of position of `x` in `knots`.
+//' @param x [\code{numeric(1)]\cr 
+//'   Point to search for position in knots.
+//' @param knots [\code{numeric}]\cr 
+//'   Vector of knots. It's the users responsibility to pass a sorted vector.
+//' @return Index of position of \code{x} in `knots`.
 //' @examples
 //' knots = 1:10
 //' findSpan(1, knots)
@@ -87,11 +88,13 @@ unsigned int findSpan (const double& x, const arma::vec& knots)
 //' splines depending on the number of knots and degree. This function just
 //' handles equidistant knots.
 //' 
-//' @param values `arma::vec` Points to create the basis matrix.
-//' @param n_knots `unsigned int` Number of innter knots.
-//' @param degree `unsigned int` polynomial degree of splines.
-//'    
-//' @return `arma::vec` of knots.
+//' @param values [\code{numeric}}\cr 
+//'   Points to create the basis matrix.
+//' @param n_knots [\code{integer(1)}]\cr 
+//'   Number of innter knots.
+//' @param degree [\code{integer(1)]}\cr 
+//'   Polynomial degree of splines.
+//' @return Vector of knots.
 //' @examples
 //' x = sort(runif(100, 0, 10))
 //' y = 2 * sin(x) + rnorm(100, 0, 0.5)
@@ -125,23 +128,27 @@ arma::vec createKnots (const arma::vec& values, const unsigned int& n_knots,
   return knots;
 }
 
-//' De Boors algorithm to find basis functions
+//' Transformation from a vector of input points to dense matrix of basis
 //' 
-//' @param x `double` Point to search for position in knots.
-//' @param degree `unsigned int` Degree of the polynomial between the knots.
-//' @param knots `arma::vec` Vector of knots. It's the users responsibility to
-//'   pass a **SORTED** vector.
-//'   
-//' @return `arma::mat` dense matrix containing the basis functions.
+//' This functions takes a vector of points and create a sparse matrix of
+//' basis functions. Each row contains the basis of the corresponding value 
+//' in `values`.
+//' 
+//' @param values [\code{numeric}}\cr 
+//'   Points to create the basis matrix.
+//' @param degree [\code{integer(1)]}\cr 
+//'   Polynomial degree of splines.
+//' @param knots [\code{numeric}]\cr 
+//'   Vector of knots on which the splines are computed.
+//' @return Vector of knots.
 //' @examples
-//' x = sort(runif(100, 0, 10))
-//' y = 2 * sin(x) + rnorm(100, 0, 0.5)
-//' 
-//' # Create knots on the space of x:
-//' knots = createKnots(values = x, n_knots = 7, degree = 3)
-//' 
-//' # Create basis functions for one value:
-//' basisFuns(x = x[30], degree = 3, knots = knots)
+//' nsim = 100
+//' x = sort(runif(nsim, 0, 10))
+//' y = 2 * sin(x) + rnorm(nsim, 0, 0.5) 
+//' knots = createKnots(values = x, n_knots = 20, degree = 3)
+//'
+//' # Create spline basis:
+//' basis = createBasis(values = x, degree = 3, knots = knots)
 //' @export
 // [[Rcpp::export]]
 arma::mat createBasis (const arma::vec& values, const unsigned int& degree, 
@@ -204,19 +211,16 @@ arma::mat createBasis (const arma::vec& values, const unsigned int& degree,
 //' This functions takes a vector of points and create a sparse matrix of
 //' basis functions. Each row contains the basis of the corresponding value 
 //' in `values`.
-//'
-//' Instead of calculating each row through a helper function we directly 
-//' calculate deboors algorithm here. This is due to the procedure how 
-//' sparse matrices should be allocated and constructed.
 //' 
-//' @param values `arma::vec` Points to create the basis matrix.
-//' @param n_knots `unsigned int` Number of innter knots.
-//' @param degree `unsigned int` polynomial degree of splines.
-//'    
-//' @return `arma::sp_mat` sparse matrix of base functions.
+//' @param values [\code{numeric}}\cr 
+//'   Points to create the basis matrix.
+//' @param degree [\code{integer(1)]}\cr 
+//'   Polynomial degree of splines.
+//' @param knots [\code{numeric}]\cr 
+//'   Vector of knots on which the splines are computed.
+//' @return Vector of knots.
 //' @examples
 //' nsim = 100
-//' 
 //' x = sort(runif(nsim, 0, 10))
 //' y = 2 * sin(x) + rnorm(nsim, 0, 0.5) 
 //' knots = createKnots(values = x, n_knots = 20, degree = 3)

@@ -7,13 +7,15 @@
 penaltyMat(nparams, differences)
 }
 \arguments{
-\item{nparams}{`unsigned int` Number of params which should be penalized.
+\item{nparams}{[\code{integer(1)}]\cr 
+Number of params which should be penalized.
 This also pretend the number of rows and columns.}
 
-\item{differences}{`unsigned int` Number of penalized differences.}
+\item{differences}{[\code{integer(1)}]\cr 
+Number of penalized differences.//'}
 }
 \value{
-`arma::sp_mat` Sparse penalty matrix used for p splines.
+\code{arma::sp_mat} Sparse penalty matrix used for p splines.
 }
 \description{
 This function calculates the penalty matrix for a given number of 
