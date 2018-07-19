@@ -87,10 +87,10 @@ createKnots <- function(values, n_knots, degree) {
 #' knots = createKnots(values = x, n_knots = 20, degree = 3)
 #'
 #' # Create spline basis:
-#' basis = createBasis(values = x, degree = 3, knots = knots)
+#' basis = createSplineBasis(values = x, degree = 3, knots = knots)
 #' @export
-createBasis <- function(values, degree, knots) {
-    .Call(`_compboostSplines_createBasis`, values, degree, knots)
+createSplineBasis <- function(values, degree, knots) {
+    .Call(`_compboostSplines_createSplineBasis`, values, degree, knots)
 }
 
 #' Transformation from a vector of input points to sparse matrix of basis
@@ -113,9 +113,9 @@ createBasis <- function(values, degree, knots) {
 #' knots = createKnots(values = x, n_knots = 20, degree = 3)
 #'
 #' # Create spline basis:
-#' basis = createSparseBasis(values = x, degree = 3, knots = knots)
+#' basis = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 #' @export
-createSparseBasis <- function(values, degree, knots) {
-    .Call(`_compboostSplines_createSparseBasis`, values, degree, knots)
+createSparseSplineBasis <- function(values, degree, knots) {
+    .Call(`_compboostSplines_createSparseSplineBasis`, values, degree, knots)
 }
 

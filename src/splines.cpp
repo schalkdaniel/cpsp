@@ -148,10 +148,10 @@ arma::vec createKnots (const arma::vec& values, const unsigned int& n_knots,
 //' knots = createKnots(values = x, n_knots = 20, degree = 3)
 //'
 //' # Create spline basis:
-//' basis = createBasis(values = x, degree = 3, knots = knots)
+//' basis = createSplineBasis(values = x, degree = 3, knots = knots)
 //' @export
 // [[Rcpp::export]]
-arma::mat createBasis (const arma::vec& values, const unsigned int& degree, 
+arma::mat createSplineBasis (const arma::vec& values, const unsigned int& degree, 
   const arma::vec& knots)
 {
   unsigned int n_cols =  knots.size() - (degree + 1);
@@ -226,10 +226,10 @@ arma::mat createBasis (const arma::vec& values, const unsigned int& degree,
 //' knots = createKnots(values = x, n_knots = 20, degree = 3)
 //'
 //' # Create spline basis:
-//' basis = createSparseBasis(values = x, degree = 3, knots = knots)
+//' basis = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 //' @export
 // [[Rcpp::export]]
-arma::sp_mat createSparseBasis (arma::vec& values, const unsigned int& degree, 
+arma::sp_mat createSparseSplineBasis (arma::vec& values, const unsigned int& degree, 
   const arma::vec& knots)
 {
 

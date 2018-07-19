@@ -13,10 +13,10 @@ test_that("splines can be computed", {
     knots = createKnots(values = x, n_knots = 100, degree = 3)
   })
   expect_silent({
-    X = createBasis(values = x, degree = 3, knots = knots)
+    X = createSplineBasis(values = x, degree = 3, knots = knots)
   })
   expect_silent({
-    X.sparse = createSparseBasis(values = x, degree = 3, knots = knots)
+    X.sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
   })
 
   X.sparse.dense = as.matrix(X.sparse)

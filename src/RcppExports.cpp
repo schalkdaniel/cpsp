@@ -43,38 +43,43 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// createBasis
-arma::mat createBasis(const arma::vec& values, const unsigned int& degree, const arma::vec& knots);
-RcppExport SEXP _compboostSplines_createBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
+// createSplineBasis
+arma::mat createSplineBasis(const arma::vec& values, const unsigned int& degree, const arma::vec& knots);
+RcppExport SEXP _compboostSplines_createSplineBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::vec& >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< const unsigned int& >::type degree(degreeSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type knots(knotsSEXP);
-    rcpp_result_gen = Rcpp::wrap(createBasis(values, degree, knots));
+    rcpp_result_gen = Rcpp::wrap(createSplineBasis(values, degree, knots));
     return rcpp_result_gen;
 END_RCPP
 }
-// createSparseBasis
-arma::sp_mat createSparseBasis(arma::vec& values, const unsigned int& degree, const arma::vec& knots);
-RcppExport SEXP _compboostSplines_createSparseBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
+// createSparseSplineBasis
+arma::sp_mat createSparseSplineBasis(arma::vec& values, const unsigned int& degree, const arma::vec& knots);
+RcppExport SEXP _compboostSplines_createSparseSplineBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::vec& >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< const unsigned int& >::type degree(degreeSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type knots(knotsSEXP);
-    rcpp_result_gen = Rcpp::wrap(createSparseBasis(values, degree, knots));
+    rcpp_result_gen = Rcpp::wrap(createSparseSplineBasis(values, degree, knots));
     return rcpp_result_gen;
 END_RCPP
 }
+
+RcppExport SEXP _compboostSplines_createBasis(SEXP, SEXP, SEXP);
+RcppExport SEXP _compboostSplines_createSparseBasis(SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"_compboostSplines_penaltyMat", (DL_FUNC) &_compboostSplines_penaltyMat, 2},
     {"_compboostSplines_findSpan", (DL_FUNC) &_compboostSplines_findSpan, 2},
     {"_compboostSplines_createKnots", (DL_FUNC) &_compboostSplines_createKnots, 3},
-    {"_compboostSplines_createBasis", (DL_FUNC) &_compboostSplines_createBasis, 3},
+    {"_compboostSplines_createSplineBasis", (DL_FUNC) &_compboostSplines_createSplineBasis, 3},
+    {"_compboostSplines_createSparseSplineBasis", (DL_FUNC) &_compboostSplines_createSparseSplineBasis, 3},
+    {"_compboostSplines_createBasis",       (DL_FUNC) &_compboostSplines_createBasis,       3},
     {"_compboostSplines_createSparseBasis", (DL_FUNC) &_compboostSplines_createSparseBasis, 3},
     {NULL, NULL, 0}
 };
