@@ -70,17 +70,12 @@ BEGIN_RCPP
 END_RCPP
 }
 
-RcppExport SEXP _compboostSplines_createBasis(SEXP, SEXP, SEXP);
-RcppExport SEXP _compboostSplines_createSparseBasis(SEXP, SEXP, SEXP);
-
 static const R_CallMethodDef CallEntries[] = {
     {"_compboostSplines_penaltyMat", (DL_FUNC) &_compboostSplines_penaltyMat, 2},
     {"_compboostSplines_findSpan", (DL_FUNC) &_compboostSplines_findSpan, 2},
     {"_compboostSplines_createKnots", (DL_FUNC) &_compboostSplines_createKnots, 3},
     {"_compboostSplines_createSplineBasis", (DL_FUNC) &_compboostSplines_createSplineBasis, 3},
     {"_compboostSplines_createSparseSplineBasis", (DL_FUNC) &_compboostSplines_createSparseSplineBasis, 3},
-    {"_compboostSplines_createBasis",       (DL_FUNC) &_compboostSplines_createBasis,       3},
-    {"_compboostSplines_createSparseBasis", (DL_FUNC) &_compboostSplines_createSparseBasis, 3},
     {NULL, NULL, 0}
 };
 
