@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/schalkdaniel/compboostSplines.svg?branch=master)](https://travis-ci.org/schalkdaniel/compboostSplines)
+[![Coverage Status](https://coveralls.io/repos/github/schalkdaniel/compboostSplines/badge.svg)](https://coveralls.io/github/schalkdaniel/compboostSplines)
+
+
 ## C++ Spline Implementation of Compboost
 
 ## About
