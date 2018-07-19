@@ -45,6 +45,18 @@ basis[1:10, 1:10]
 ##  [9,] 0.0000000 0.000000 0.04624 0.566734 0.38002 0.007012    0    0    0     0
 ## [10,] 0.0000000 0.000000 0.01405 0.439872 0.51657 0.029512    0    0    0     0
 
+# You can also create sparse matrices:
+basis.sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
+str(basis.sparse)
+## Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
+##   ..@ i       : int [1:398] 0 1 2 3 4 5 6 0 1 2 ...
+##   ..@ p       : int [1:25] 0 7 18 37 58 77 101 119 135 153 ...
+##   ..@ Dim     : int [1:2] 100 24
+##   ..@ Dimnames:List of 2
+##   .. ..$ : NULL
+##   .. ..$ : NULL
+##   ..@ x       : num [1:398] 0.1667 0.1315 0.0691 0.0495 0.0267 ...
+##   ..@ factors : list()
 
 
 # Check if row sums add up to 1:
