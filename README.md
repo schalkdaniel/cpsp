@@ -106,7 +106,10 @@ ggplot() + geom_point(data = plot.df, mapping = aes(x = x, y = y)) +
   theme_tufte() + 
   scale_color_brewer(palette = "Set1")
 ```
-![Spline Viz](other/spline.png?raw=true)
+<p align="center">
+  <img src="other/spline.png?raw=true" alt="Spline Visualization" width="70%">
+</p>
+
 
 ## License
 
