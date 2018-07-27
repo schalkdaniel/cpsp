@@ -4,18 +4,17 @@
 
 ## C++ Spline Implementation of Compboost
 
-## About
-
 This repository is just for testing the spline implementation of compboost by providing the spline functions directly without any bloated code around it.
 
 ## Installation
 
-Just install it using devtools:
+#### Developer version:
+
 ```r
 devtools::install_github("schalkdaniel/compboostSplines")
 ```
 
-## How to Use
+## Examples
 
 This package can build spline bases for you. Ether as dense or sparse matrix. With that matrix it is possible to do e.g. spline regression or other cool stuff:
 ```r
@@ -108,3 +107,31 @@ ggplot() + geom_point(data = plot.df, mapping = aes(x = x, y = y)) +
   scale_color_brewer(palette = "Set1")
 ```
 ![Spline Viz](other/spline.png?raw=true)
+
+## License
+
+© 2018 [Daniel Schalk](https://danielschalk.com)
+
+The contents of this repository are distributed under the MIT license. See below for details:
+
+> The MIT License (MIT)
+> 
+> Copyright (c) 2018 Daniel Schalk
+> 
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
+> 
+> The above copyright notice and this permission notice shall be included in all
+> copies or substantial portions of the Software.
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+> SOFTWARE.

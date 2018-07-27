@@ -97,8 +97,8 @@ Rcpp::cppFunction(code = dense.crossprod, depends = "RcppArmadillo")
 Rcpp::cppFunction(code = sparse.crossprod, depends = "RcppArmadillo")
 
 (bm = microbenchmark::microbenchmark(
-	"dense crossprod" = createBasis(values = x, degree = 3, knots = knots),
-	"sparse crossprod" = createSparseBasis(values = x, degree = 3, knots = knots), 
+	"dense crossprod" = denseCrossprod(X),
+	"sparse crossprod" = sparseCrossprod(X.sparse), 
 	times = 10L
 ))
 
