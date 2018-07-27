@@ -4,7 +4,9 @@
 
 ## C++ Spline Implementation of Compboost
 
-This repository is just for testing the spline implementation of compboost by providing the spline functions directly without any bloated code around it.
+This repository contains the spline implementation of compboost by providing the spline functions directly without any bloated code around it. 
+
+**Feel free to extend the algorithms, improve performance, or use for your own projets.**
 
 ## Installation
 
@@ -16,7 +18,7 @@ devtools::install_github("schalkdaniel/compboostSplines")
 
 ## Examples
 
-This package can build spline bases for you. Ether as dense or sparse matrix. With that matrix it is possible to do e.g. spline regression or other cool stuff:
+This package can build spline bases for you, ether as dense or sparse matrix. With the matrix it is possible to do e.g. spline regression or other cool stuff:
 ```r
 library(compboostSpliens)
 
