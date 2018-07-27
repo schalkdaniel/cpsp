@@ -4,7 +4,7 @@
 
 ## C++ Spline Implementation of Compboost
 
-This repository contains the spline implementation of compboost by providing the spline functions directly without any bloated code around it. 
+This repository contains the spline implementation of [compboost](https://compboost.org) by providing the spline functions directly without any bloated code around it. 
 
 **Feel free to extend the algorithms, improve performance, or use for your own projets.**
 
