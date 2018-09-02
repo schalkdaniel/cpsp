@@ -13,8 +13,7 @@ knitr::opts_chunk$set(
 options(width=100)
 ```
 
-[![Build Status](https://travis-ci.org/schalkdaniel/compboostSplines.svg?branch=master)](https://travis-ci.org/schalkdaniel/compboostSplines)
-[![Coverage Status](https://coveralls.io/repos/github/schalkdaniel/compboostSplines/badge.svg)](https://coveralls.io/github/schalkdaniel/compboostSplines)
+[![Build Status](https://travis-ci.org/schalkdaniel/compboostSplines.svg?branch=master)](https://travis-ci.org/schalkdaniel/compboostSplines)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/schalkdaniel/compboostSplines?branch=master&svg=true)](https://ci.appveyor.com/project/schalkdaniel/compboostSplines)[![Coverage Status](https://coveralls.io/repos/github/schalkdaniel/compboostSplines/badge.svg)](https://coveralls.io/github/schalkdaniel/compboostSplines)
 
 
 ## C++ Spline Implementation of Compboost

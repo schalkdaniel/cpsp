@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/schalkdaniel/compboostSplines.svg?branch=master)](https://travis-ci.org/schalkdaniel/compboostSplines) [![Coverage Status](https://coveralls.io/repos/github/schalkdaniel/compboostSplines/badge.svg)](https://coveralls.io/github/schalkdaniel/compboostSplines)
+[![Build Status](https://travis-ci.org/schalkdaniel/compboostSplines.svg?branch=master)](https://travis-ci.org/schalkdaniel/compboostSplines)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/schalkdaniel/compboostSplines?branch=master&svg=true)](https://ci.appveyor.com/project/schalkdaniel/compboostSplines)[![Coverage Status](https://coveralls.io/repos/github/schalkdaniel/compboostSplines/badge.svg)](https://coveralls.io/github/schalkdaniel/compboostSplines)
 
 C++ Spline Implementation of Compboost
 --------------------------------------
@@ -43,29 +43,29 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 basis[1:10, 1:10]
-#>             [,1]    [,2]   [,3]      [,4]    [,5] [,6] [,7] [,8] [,9] [,10]
-#>  [1,] 0.16666667 0.66667 0.1667 0.0000000 0.00000    0    0    0    0     0
-#>  [2,] 0.10278868 0.64617 0.2505 0.0005491 0.00000    0    0    0    0     0
-#>  [3,] 0.06394969 0.60216 0.3305 0.0034038 0.00000    0    0    0    0     0
-#>  [4,] 0.05831301 0.59232 0.3451 0.0042941 0.00000    0    0    0    0     0
-#>  [5,] 0.05392638 0.58380 0.3571 0.0051344 0.00000    0    0    0    0     0
-#>  [6,] 0.03738148 0.54289 0.4097 0.0100718 0.00000    0    0    0    0     0
-#>  [7,] 0.00164882 0.29210 0.6255 0.0807240 0.00000    0    0    0    0     0
-#>  [8,] 0.00092759 0.26819 0.6380 0.0928339 0.00000    0    0    0    0     0
-#>  [9,] 0.00001665 0.19089 0.6646 0.1445267 0.00000    0    0    0    0     0
-#> [10,] 0.00000000 0.01703 0.4586 0.4992054 0.02517    0    0    0    0     0
+#>            [,1]       [,2]   [,3]      [,4]   [,5]      [,6] [,7] [,8] [,9] [,10]
+#>  [1,] 0.1666667 0.66666667 0.1667 0.0000000 0.0000 0.000e+00    0    0    0     0
+#>  [2,] 0.0939015 0.63900236 0.2662 0.0008791 0.0000 0.000e+00    0    0    0     0
+#>  [3,] 0.0818524 0.62683222 0.2897 0.0015663 0.0000 0.000e+00    0    0    0     0
+#>  [4,] 0.0555011 0.58694843 0.3527 0.0048161 0.0000 0.000e+00    0    0    0     0
+#>  [5,] 0.0007501 0.26059950 0.6417 0.0969934 0.0000 0.000e+00    0    0    0     0
+#>  [6,] 0.0000354 0.19817191 0.6632 0.1385795 0.0000 0.000e+00    0    0    0     0
+#>  [7,] 0.0000000 0.00043869 0.2439 0.6489190 0.1067 0.000e+00    0    0    0     0
+#>  [8,] 0.0000000 0.00004048 0.1997 0.6628952 0.1374 0.000e+00    0    0    0     0
+#>  [9,] 0.0000000 0.00001300 0.1889 0.6648806 0.1462 0.000e+00    0    0    0     0
+#> [10,] 0.0000000 0.00000000 0.1661 0.6666655 0.1672 2.059e-10    0    0    0     0
 
 # You can also create sparse matrices:
 basis.sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis.sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 5 6 7 8 0 ...
-#>   ..@ p       : int [1:25] 0 9 19 34 51 65 83 101 121 143 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 5 0 1 2 3 ...
+#>   ..@ p       : int [1:25] 0 6 15 29 48 68 88 108 128 146 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.1667 0.1028 0.0639 0.0583 0.0539 ...
+#>   ..@ x       : num [1:398] 0.16667 0.0939 0.08185 0.0555 0.00075 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -124,9 +124,9 @@ In order to compare different models such as a linear model and additive model (
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom: 
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 66965556256
+#> [1] 40970329743
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 443.5
+#> [1] 419.7
 
 # This is now used for a new estimator:
 beta_df2 = solve(t(basis) %*% basis + penalty_df2 * K) %*% t(basis) %*% y
