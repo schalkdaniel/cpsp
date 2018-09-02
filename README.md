@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/schalkdaniel/compboostSplines.svg?branch=master)](https://travis-ci.org/schalkdaniel/compboostSplines)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/schalkdaniel/compboostSplines?branch=master&svg=true)](https://ci.appveyor.com/project/schalkdaniel/compboostSplines)[![Coverage Status](https://coveralls.io/repos/github/schalkdaniel/compboostSplines/badge.svg)](https://coveralls.io/github/schalkdaniel/compboostSplines)
+[![Build Status](https://travis-ci.org/schalkdaniel/compboostSplines.svg?branch=master)](https://travis-ci.org/schalkdaniel/compboostSplines) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/schalkdaniel/compboostSplines?branch=master&svg=true)](https://ci.appveyor.com/project/schalkdaniel/compboostSplines) [![Coverage Status](https://coveralls.io/repos/github/schalkdaniel/compboostSplines/badge.svg)](https://coveralls.io/github/schalkdaniel/compboostSplines) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](#license)
 
 C++ Spline Implementation of Compboost
 --------------------------------------
@@ -43,29 +43,29 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 basis[1:10, 1:10]
-#>            [,1]       [,2]   [,3]      [,4]   [,5]      [,6] [,7] [,8] [,9] [,10]
-#>  [1,] 0.1666667 0.66666667 0.1667 0.0000000 0.0000 0.000e+00    0    0    0     0
-#>  [2,] 0.0939015 0.63900236 0.2662 0.0008791 0.0000 0.000e+00    0    0    0     0
-#>  [3,] 0.0818524 0.62683222 0.2897 0.0015663 0.0000 0.000e+00    0    0    0     0
-#>  [4,] 0.0555011 0.58694843 0.3527 0.0048161 0.0000 0.000e+00    0    0    0     0
-#>  [5,] 0.0007501 0.26059950 0.6417 0.0969934 0.0000 0.000e+00    0    0    0     0
-#>  [6,] 0.0000354 0.19817191 0.6632 0.1385795 0.0000 0.000e+00    0    0    0     0
-#>  [7,] 0.0000000 0.00043869 0.2439 0.6489190 0.1067 0.000e+00    0    0    0     0
-#>  [8,] 0.0000000 0.00004048 0.1997 0.6628952 0.1374 0.000e+00    0    0    0     0
-#>  [9,] 0.0000000 0.00001300 0.1889 0.6648806 0.1462 0.000e+00    0    0    0     0
-#> [10,] 0.0000000 0.00000000 0.1661 0.6666655 0.1672 2.059e-10    0    0    0     0
+#>            [,1]   [,2]   [,3]       [,4]      [,5] [,6] [,7] [,8] [,9] [,10]
+#>  [1,] 0.1666667 0.6667 0.1667 0.00000000 0.000e+00    0    0    0    0     0
+#>  [2,] 0.1472007 0.6651 0.1877 0.00001112 0.000e+00    0    0    0    0     0
+#>  [3,] 0.1063286 0.6487 0.2446 0.00044893 0.000e+00    0    0    0    0     0
+#>  [4,] 0.0948850 0.6399 0.2644 0.00083630 0.000e+00    0    0    0    0     0
+#>  [5,] 0.0432898 0.5594 0.3894 0.00790391 0.000e+00    0    0    0    0     0
+#>  [6,] 0.0144843 0.4428 0.5139 0.02881006 0.000e+00    0    0    0    0     0
+#>  [7,] 0.0127412 0.4307 0.5248 0.03178230 0.000e+00    0    0    0    0     0
+#>  [8,] 0.0038403 0.3379 0.5972 0.06103409 0.000e+00    0    0    0    0     0
+#>  [9,] 0.0006287 0.2547 0.6443 0.10031948 0.000e+00    0    0    0    0     0
+#> [10,] 0.0000000 0.1660 0.6667 0.16730553 3.463e-10    0    0    0    0     0
 
 # You can also create sparse matrices:
 basis.sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis.sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 5 0 1 2 3 ...
-#>   ..@ p       : int [1:25] 0 6 15 29 48 68 88 108 128 146 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 5 6 7 8 0 ...
+#>   ..@ p       : int [1:25] 0 9 27 48 75 98 115 132 145 160 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.16667 0.0939 0.08185 0.0555 0.00075 ...
+#>   ..@ x       : num [1:398] 0.1667 0.1472 0.1063 0.0949 0.0433 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -124,9 +124,9 @@ In order to compare different models such as a linear model and additive model (
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom: 
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 40970329743
+#> [1] 42751174892
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 419.7
+#> [1] 418.8
 
 # This is now used for a new estimator:
 beta_df2 = solve(t(basis) %*% basis + penalty_df2 * K) %*% t(basis) %*% y
