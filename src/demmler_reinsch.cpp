@@ -30,6 +30,11 @@ double findLambdaWithToms748 (const arma::vec& singular_values, const double& de
   return (r.first + r.second) / 2;
 }
 
+/* NOTES:
+ * - Multiplying penalty matrix with epsilon?
+ * - Root is always calculated for df2?
+ * - Armadillo svd uses a divide-and-conquer algorithm with approximations which is much faster than the standard one.
+ */
 
 //' Transform degrees of freedom to lambda
 //'
