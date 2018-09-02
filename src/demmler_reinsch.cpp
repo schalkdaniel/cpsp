@@ -1,7 +1,10 @@
 #ifndef DEMMLER_REINSCH_CPP_
 #define DEMMLER_REINSCH_CPP_
 
+// [[Rcpp::depends(RcppArmadillo)]]    
 #include <RcppArmadillo.h>
+
+// [[Rcpp::depends(BH)]]    
 #include <boost/math/tools/toms748_solve.hpp>
 
 #include <functional> // functional
@@ -44,7 +47,7 @@ double findLambdaWithToms748 (const arma::vec& singular_values, const double& de
 //' @examples
 //' X = cbind(1, iris$Petal.Length, iris$Sepal.Length)
 //' weights = rep(1, nrow(iris))
-//' pen = penaltyMat(10, 2)
+//' pen = penaltyMat(ncol(X), 2)
 //' XtX = t(X) %*% t(diag(weights)) %*% diag(weights) %*% X
 //' 
 //' demmlerReinsch(XtX, pen, 2)

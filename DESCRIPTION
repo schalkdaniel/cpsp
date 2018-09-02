@@ -16,7 +16,8 @@ Imports:
     Matrix
 LinkingTo:
     Rcpp,
-    RcppArmadillo
+    RcppArmadillo,
+    BH
 Suggests:
     testthat,
     knitr,
