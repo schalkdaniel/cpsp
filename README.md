@@ -20,7 +20,7 @@ devtools::install_github("schalkdaniel/compboostSplines")
 
 This package can build spline bases for you, ether as dense or sparse matrix. With the matrix it is possible to do e.g. spline regression or other cool stuff:
 ```r
-library(compboostSpliens)
+library(compboostSplines)
 
 nsim = 100
 

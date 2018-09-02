@@ -3,6 +3,7 @@
 export(createKnots)
 export(createSparseSplineBasis)
 export(createSplineBasis)
+export(demmlerReinsch)
 export(findSpan)
 export(penaltyMat)
 import(Matrix)
