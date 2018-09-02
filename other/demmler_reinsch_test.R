@@ -1,9 +1,19 @@
-X = cbind(1, iris$Sepal.Length, iris$Sepal.Width)
-D = compboostSplines::penaltyMat(3, 2)
+Rcpp::compileAttributes()
+devtools::load_all()
 
-debug(mboost:::df2lambda)
+X = cbind(1, iris$Sepal.Length, iris$Sepal.Width, iris$Petal.Length, iris$Petal.Width)
+D = compboostSplines::penaltyMat(ncol(X), 2)
+
+# debug(mboost:::df2lambda)
 mboost:::df2lambda(X = X, df = 2.5, dmat = D, weights = 1)
-undebug(mboost:::df2lambda)
+demmlerReinsch(t(X) %*% X, D, 2.5)
+# undebug(mboost:::df2lambda)
+
+
+microbenchmark::microbenchmark(
+  "mboost" = mboost:::df2lambda(X = X, df = 2.5, dmat = D, weights = 1),
+  "cboost" = demmlerReinsch(t(X) %*% X, D, 2.5)
+)
 
 df = 2.5
 dmat = D
@@ -31,35 +41,43 @@ if (check) {
   dfFun = function(lambda) 2 * sum(1/(1 + lambda * d)) - sum(1/(1 + lambda * d)^2)
 }
 
-uniroot(f = function (x) { dfFun(x) - df }, interval = c(0, 1e15))
+uniroot(f = function (x) { dfFun(x) - df}, interval = c(0, 1e15))
 
-f  = function (x) { dfFun(x) - df }
-g  = function (x) { -2 * sum((1 + x * d)^{-2}) + 2 * sum((1 + x * d)^{-3} * d) }
+findLambdaWithToms748(d, df, 0, 40)
 
-rootNewton = function (fun, grad, x_start, eps = 1e-6, iter_max = 1e3) 
-{
-  for (k in seq_len(iter_max)) {
-    x_new = x_start - fun(x_start) / grad(x_start)
+
+
+
+
+
+
+# f  = function (x) { dfFun(x) - df }
+# g  = function (x) { -2 * sum((1 + x * d)^{-2}) + 2 * sum((1 + x * d)^{-3} * d) }
+
+# rootNewton = function (fun, grad, x_start, eps = 1e-6, iter_max = 1e3) 
+# {
+#   for (k in seq_len(iter_max)) {
+#     x_new = x_start - fun(x_start) / grad(x_start)
     
-    if (abs(x_new - x_start) <= eps) {
-      message("Stop root finding by epsilon criteria with a root of ", round(x_new, 4))
-      break
-    }
-    cat("Iteration ", k, ": x = ", round(x_new, 4), ", f(x) = ", round(fun(x_new), 4), ", grad(x) = ", round(grad(x_new)), "\n", sep = "")
-    x_start = x_new
-  }
-  return (x_start)
-}
+#     if (abs(x_new - x_start) <= eps) {
+#       message("Stop root finding by epsilon criteria with a root of ", round(x_new, 4))
+#       break
+#     }
+#     cat("Iteration ", k, ": x = ", round(x_new, 4), ", f(x) = ", round(fun(x_new), 4), ", grad(x) = ", round(grad(x_new)), "\n", sep = "")
+#     x_start = x_new
+#   }
+#   return (x_start)
+# }
 
-(root = rootNewton(f, g, 3))
+# (root = rootNewton(f, g, 3))
 
-x = seq(-1, 4, 0.01)
-y = x
+# x = seq(-1, 4, 0.01)
+# y = x
 
-for (i in seq_along(x)) {
-  y[i] = f(x[i])
-}
+# for (i in seq_along(x)) {
+#   y[i] = f(x[i])
+# }
 
-plot(x = x, y = y, type = "l")
-abline(h = 0, col = "red")
-abline(v = root, col = "blue")
+# plot(x = x, y = y, type = "l")
+# abline(h = 0, col = "red")
+# abline(v = root, col = "blue")

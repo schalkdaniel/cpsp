@@ -6,6 +6,33 @@
 
 using namespace Rcpp;
 
+// findLambdaWithToms748
+double findLambdaWithToms748(const arma::vec& singular_values, const double& degrees_of_freedom, const double& lower_bound, const double& upper_bound);
+RcppExport SEXP _compboostSplines_findLambdaWithToms748(SEXP singular_valuesSEXP, SEXP degrees_of_freedomSEXP, SEXP lower_boundSEXP, SEXP upper_boundSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type singular_values(singular_valuesSEXP);
+    Rcpp::traits::input_parameter< const double& >::type degrees_of_freedom(degrees_of_freedomSEXP);
+    Rcpp::traits::input_parameter< const double& >::type lower_bound(lower_boundSEXP);
+    Rcpp::traits::input_parameter< const double& >::type upper_bound(upper_boundSEXP);
+    rcpp_result_gen = Rcpp::wrap(findLambdaWithToms748(singular_values, degrees_of_freedom, lower_bound, upper_bound));
+    return rcpp_result_gen;
+END_RCPP
+}
+// demmlerReinsch
+double demmlerReinsch(const arma::mat& XtX, const arma::mat& penalty_mat, const double& degrees_of_freedom);
+RcppExport SEXP _compboostSplines_demmlerReinsch(SEXP XtXSEXP, SEXP penalty_matSEXP, SEXP degrees_of_freedomSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type XtX(XtXSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type penalty_mat(penalty_matSEXP);
+    Rcpp::traits::input_parameter< const double& >::type degrees_of_freedom(degrees_of_freedomSEXP);
+    rcpp_result_gen = Rcpp::wrap(demmlerReinsch(XtX, penalty_mat, degrees_of_freedom));
+    return rcpp_result_gen;
+END_RCPP
+}
 // penaltyMat
 arma::mat penaltyMat(const unsigned int& nparams, const unsigned int& differences);
 RcppExport SEXP _compboostSplines_penaltyMat(SEXP nparamsSEXP, SEXP differencesSEXP) {
@@ -71,6 +98,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_compboostSplines_findLambdaWithToms748", (DL_FUNC) &_compboostSplines_findLambdaWithToms748, 4},
+    {"_compboostSplines_demmlerReinsch", (DL_FUNC) &_compboostSplines_demmlerReinsch, 3},
     {"_compboostSplines_penaltyMat", (DL_FUNC) &_compboostSplines_penaltyMat, 2},
     {"_compboostSplines_findSpan", (DL_FUNC) &_compboostSplines_findSpan, 2},
     {"_compboostSplines_createKnots", (DL_FUNC) &_compboostSplines_createKnots, 3},

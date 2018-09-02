@@ -19,5 +19,6 @@ LinkingTo:
     RcppArmadillo
 Suggests:
     testthat,
-    knitr
+    knitr,
+    mboost
 VignetteBuilder: knitr
