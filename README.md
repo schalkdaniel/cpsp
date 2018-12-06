@@ -5,7 +5,7 @@
 C++ Spline Implementation of Compboost
 --------------------------------------
 
-This repository contains the spline implementation of [compboost](https://compboost.org) by providing the spline functions directly without any bloated code around it.
+This repository contains the spline implementation of [compboost](https://compboost.org) by providing spline functions directly without bloated code.
 
 **Feel free to extend the algorithms, improve performance, or use for your own projets.**
 
@@ -26,7 +26,7 @@ Examples
 
 ### Spline Regression
 
-This package can build spline bases for you, ether as dense or sparse matrix. With the matrix it is possible to do e.g. spline regression or other cool stuff:
+This package can build spline bases for you, either as dense or sparse matrix. With the matrix it is possible to do e.g. spline regression or other cool stuff:
 
 ``` r
 library(compboostSplines)
@@ -119,7 +119,7 @@ ggplot() + geom_point(data = plot_df, mapping = aes(x = x, y = y)) +
 
 ### Demmler-Reinsch-Orthogonalization
 
-In order to compare different models such as a linear model and additive model (using splines) we need to set the degrees of freedom equally. The Demmler-Reinsch-Orthogonalization can be used to translate given degrees of freedom to a penalty term:
+In order to compare different models such as a linear model and an additive model (using splines) we need to set the degrees of freedom to the same value. However, setting degrees of freedom is not possible with the original algorithms. Therefore, the Demmler-Reinsch-Orthogonalization can be used to translate given degrees of freedom to a penalty term:
 
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom: 
