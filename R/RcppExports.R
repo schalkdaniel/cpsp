@@ -144,3 +144,37 @@ createSparseSplineBasis <- function(values, degree, knots) {
     .Call(`_compboostSplines_createSparseSplineBasis`, values, degree, knots)
 }
 
+#' Calculating row wise tensor product
+#'
+#' This function calculates the row wise tensor product which can be used
+#' for multivariate smoothing but also for modelling multivariate interactions.
+#'
+#' @param A [\code{matrix}]\cr
+#'   First matrix for the tensor product.
+#' @param B [\code{matrix}]\cr
+#'   Second matrix for the tensor product.
+#' @return \code{arma::mat} Tensor product
+#' @examples
+#' pen = penaltyMat(10, 2)
+#' @export
+rowWiseTensor <- function(A, B) {
+    .Call(`_compboostSplines_rowWiseTensor`, A, B)
+}
+
+#' Calculating row wise tensor product for sparse matrices
+#'
+#' This function calculates the row wise tensor product which can be used
+#' for multivariate smoothing but also for modelling multivariate interactions.
+#'
+#' @param A [\code{matrix}]\cr
+#'   First sparse matrix for the tensor product.
+#' @param B [\code{matrix}]\cr
+#'   Second sparse matrix for the tensor product.
+#' @return \code{arma::mat} Sparse tensor product
+#' @examples
+#' pen = penaltyMat(10, 2)
+#' @export
+rowWiseTensorSparse <- function(A, B) {
+    .Call(`_compboostSplines_rowWiseTensorSparse`, A, B)
+}
+

@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // demmlerReinsch
 double demmlerReinsch(const arma::mat& XtX, const arma::mat& penalty_mat, const double& degrees_of_freedom);
 RcppExport SEXP _compboostSplines_demmlerReinsch(SEXP XtXSEXP, SEXP penalty_matSEXP, SEXP degrees_of_freedomSEXP) {
@@ -82,6 +87,30 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rowWiseTensor
+arma::mat rowWiseTensor(const arma::mat& A, const arma::mat& B);
+RcppExport SEXP _compboostSplines_rowWiseTensor(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(rowWiseTensor(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rowWiseTensorSparse
+arma::sp_mat rowWiseTensorSparse(const arma::sp_mat& A, const arma::sp_mat& B);
+RcppExport SEXP _compboostSplines_rowWiseTensorSparse(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(rowWiseTensorSparse(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_compboostSplines_demmlerReinsch", (DL_FUNC) &_compboostSplines_demmlerReinsch, 3},
@@ -90,6 +119,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_compboostSplines_createKnots", (DL_FUNC) &_compboostSplines_createKnots, 3},
     {"_compboostSplines_createSplineBasis", (DL_FUNC) &_compboostSplines_createSplineBasis, 3},
     {"_compboostSplines_createSparseSplineBasis", (DL_FUNC) &_compboostSplines_createSparseSplineBasis, 3},
+    {"_compboostSplines_rowWiseTensor", (DL_FUNC) &_compboostSplines_rowWiseTensor, 2},
+    {"_compboostSplines_rowWiseTensorSparse", (DL_FUNC) &_compboostSplines_rowWiseTensorSparse, 2},
     {NULL, NULL, 0}
 };
 
