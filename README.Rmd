@@ -32,10 +32,11 @@ devtools::install_github("schalkdaniel/compboostSplines")
 
 ## Examples
 
+<!--
 - [Spline basis](#spline-basis)
 - [Spline regression](#spline-regression)
 - [Demmler-Reinsch-Orthogonalization](#demmler-reinsch-orthogonalization)
-
+-->
 
 ### Spline basis
 
@@ -54,11 +55,11 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
-basis[1:10, 1:10]
+str(basis)
 
 # You can also create sparse matrices:
-basis.sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
-str(basis.sparse)
+basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
+str(basis_sparse)
 
 # Check if row sums add up to 1:
 rowSums(basis)
