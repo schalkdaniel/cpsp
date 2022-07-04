@@ -18,7 +18,7 @@ devtools::install(quite = TRUE, upgrade = "always")
 
 ## C++ Spline Implementation of Compboost
 
-This repository contains the spline implementation of [compboost](https://compboost.org) by providing the spline functions directly without any bloated code around it.
+Pure spline implementation of [compboost](https://compboost.org). This repository can be used for spline regression and non-parametric modelling of numerical features. The functionality contains the basis creation, the Demmler-Reinsch-Orthogonalization, as well as a method to subtract matrix bases. 
 
 **Feel free to extend the algorithms, improve performance, or use for your own projets.**
 
@@ -32,13 +32,14 @@ devtools::install_github("schalkdaniel/compboostSplines")
 
 ## Examples
 
-- [Spline Regression](#spline-regression)
+- [Spline basis](#spline-basis)
+- [Spline regression](#spline-regression)
 - [Demmler-Reinsch-Orthogonalization](#demmler-reinsch-orthogonalization)
 
 
-### Spline Regression
+### Spline basis
 
-This package can build spline bases for you, ether as dense or sparse matrix. With the matrix it is possible to do e.g. spline regression or other cool stuff:
+To create a spline basis call `createSplineBasis()` (for dense matrices) and `createSparseSplineBasis()` (for sparse matrices):
 ```{r}
 library(compboostSplines)
 
@@ -61,9 +62,24 @@ str(basis.sparse)
 
 # Check if row sums add up to 1:
 rowSums(basis)
+```
+
+### Spline regression
+
+With that, it is straight forward to use the least squares estimator for spline regression:
+
+```{r}
+# Custom function to estimate the least squares estimator
+myEstimator = function(X, y, penmat = 0) {
+  xtx = crossprod(X)
+  xty = crossprod(X, y)
+  L = chol(xtx + penmat)
+  z = backsolve(L, xty, transpose = TRUE)
+  return(as.vector(backsolve(L, z))
+}
 
 # Polynomial regression using b-splines:
-beta = solve(t(basis) %*% basis) %*% t(basis) %*% y
+beta = myEstimator(basis, y)
 
 # 20 knots may tend to overfit on the data, lets try p-splines with a penalty term of 4!
 penalty = 4
@@ -73,7 +89,7 @@ K = penaltyMat(ncol(basis), differences = 2)
 K[1:6, 1:6]
 
 # Get new estimator:
-beta_pen = solve(t(basis) %*% basis + penalty * K) %*% t(basis) %*% y
+beta_pen = myEstimator(basis, y, penalty * K)
 
 # Lets visualize the curves:
 
@@ -106,8 +122,8 @@ In order to compare different models such as a linear model and additive model (
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
 
 # This is now used for a new estimator:
-beta_df2 = solve(t(basis) %*% basis + penalty_df2 * K) %*% t(basis) %*% y
-beta_df4 = solve(t(basis) %*% basis + penalty_df4 * K) %*% t(basis) %*% y
+beta_df2 = myEstimator(X, y, penalty_df2 * K)
+beta_df4 = myEstimator(X, y, penalty_df4 * K)
 
 plot_df = data.frame(
   x = x,
