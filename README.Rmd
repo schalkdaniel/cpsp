@@ -18,7 +18,7 @@ devtools::install(quite = TRUE, upgrade = "always")
 
 ## C++ Spline Implementation of Compboost
 
-Pure spline implementation of [compboost](https://compboost.org). This repository can be used for spline regression and non-parametric modelling of numerical features. The functionality contains the basis creation, the Demmler-Reinsch-Orthogonalization, as well as a method to subtract matrix bases. 
+Pure spline implementation of [compboost](https://compboost.org). This repository can be used for spline regression and non-parametric modelling of numerical features. The functionality contains the basis creation, the Demmler-Reinsch-Orthogonalization, as well as a method to subtract matrix bases.
 
 **Feel free to extend the algorithms, improve performance, or use for your own projets.**
 
@@ -122,8 +122,8 @@ In order to compare different models such as a linear model and additive model (
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
 
 # This is now used for a new estimator:
-beta_df2 = myEstimator(X, y, penalty_df2 * K)
-beta_df4 = myEstimator(X, y, penalty_df4 * K)
+beta_df2 = myEstimator(basis, y, penalty_df2 * K)
+beta_df4 = myEstimator(basis, y, penalty_df4 * K)
 
 plot_df = data.frame(
   x = x,
