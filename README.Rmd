@@ -75,7 +75,7 @@ myEstimator = function(X, y, penmat = 0) {
   xty = crossprod(X, y)
   L = chol(xtx + penmat)
   z = backsolve(L, xty, transpose = TRUE)
-  return(as.vector(backsolve(L, z))
+  return(as.vector(backsolve(L, z)))
 }
 
 # Polynomial regression using b-splines:
