@@ -11,6 +11,18 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// centerMatrix
+arma::mat centerMatrix(const arma::mat& X1, const arma::mat& X2);
+RcppExport SEXP _compboostSplines_centerMatrix(SEXP X1SEXP, SEXP X2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X1(X1SEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type X2(X2SEXP);
+    rcpp_result_gen = Rcpp::wrap(centerMatrix(X1, X2));
+    return rcpp_result_gen;
+END_RCPP
+}
 // demmlerReinsch
 double demmlerReinsch(const arma::mat& XtX, const arma::mat& penalty_mat, const double& degrees_of_freedom);
 RcppExport SEXP _compboostSplines_demmlerReinsch(SEXP XtXSEXP, SEXP penalty_matSEXP, SEXP degrees_of_freedomSEXP) {
@@ -113,6 +125,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_compboostSplines_centerMatrix", (DL_FUNC) &_compboostSplines_centerMatrix, 2},
     {"_compboostSplines_demmlerReinsch", (DL_FUNC) &_compboostSplines_demmlerReinsch, 3},
     {"_compboostSplines_penaltyMat", (DL_FUNC) &_compboostSplines_penaltyMat, 2},
     {"_compboostSplines_findSpan", (DL_FUNC) &_compboostSplines_findSpan, 2},
