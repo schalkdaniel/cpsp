@@ -4,9 +4,9 @@ Title: C++ Spline Implementation of compboost
 Version: 0.1
 Authors@R: person("Daniel", "Schalk", email = "daniel.schalk@stat.uni-muenchen.de", role = c("aut", "cre"))
 Maintainer: Daniel Schalk <daniel.schalk@stat.uni-muenchen.de>
-Description: A C++ implementation of splines that are also used in compboost. The purpose of this package is just 
+Description: A C++ implementation of splines that are also used in compboost. The purpose of this package is just
   to provide the spline functionality through a lightweighted package.
-License: MIT + file LICENSE
+License: LGPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
