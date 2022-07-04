@@ -1,55 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-    ## Rcpp         (NA -> 1.0.8.3   ) [CRAN]
-    ## BH           (NA -> 1.78.0-0  ) [CRAN]
-    ## RcppArmad... (NA -> 0.11.2.0.0) [CRAN]
-
-    ## Installing 3 packages: Rcpp, BH, RcppArmadillo
-
-    ## Installing packages into '/Users/runner/work/_temp/Library'
-    ## (as 'lib' is unspecified)
-
-    ## 
-    ## The downloaded binary packages are in
-    ##  /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpzCHz4y/downloaded_packages
-    ## * checking for file ‘/Users/runner/work/compboostSplines/compboostSplines/DESCRIPTION’ ... OK
-    ## * preparing ‘compboostSplines’:
-    ## * checking DESCRIPTION meta-information ... OK
-    ## * cleaning src
-    ## * checking for LF line-endings in source and make files and shell scripts
-    ## * checking for empty or unneeded directories
-    ## Omitted ‘LazyData’ from DESCRIPTION
-    ## * building ‘compboostSplines_0.1.tar.gz’
-    ## 
-    ## Running /Library/Frameworks/R.framework/Resources/bin/R CMD INSTALL \
-    ##   /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpzCHz4y/compboostSplines_0.1.tar.gz \
-    ##   --install-tests 
-    ## * installing to library ‘/Users/runner/work/_temp/Library’
-    ## * installing *source* package ‘compboostSplines’ ...
-    ## ** using staged installation
-    ## ** libs
-    ## clang++ -mmacosx-version-min=10.13 -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/runner/work/_temp/Library/Rcpp/include' -I'/Users/runner/work/_temp/Library/RcppArmadillo/include' -I'/Users/runner/work/_temp/Library/BH/include' -I/usr/local/include    -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-    ## clang++ -mmacosx-version-min=10.13 -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/runner/work/_temp/Library/Rcpp/include' -I'/Users/runner/work/_temp/Library/RcppArmadillo/include' -I'/Users/runner/work/_temp/Library/BH/include' -I/usr/local/include    -fPIC  -Wall -g -O2  -c center_matrices.cpp -o center_matrices.o
-    ## clang++ -mmacosx-version-min=10.13 -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/runner/work/_temp/Library/Rcpp/include' -I'/Users/runner/work/_temp/Library/RcppArmadillo/include' -I'/Users/runner/work/_temp/Library/BH/include' -I/usr/local/include    -fPIC  -Wall -g -O2  -c demmler_reinsch.cpp -o demmler_reinsch.o
-    ## clang++ -mmacosx-version-min=10.13 -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/runner/work/_temp/Library/Rcpp/include' -I'/Users/runner/work/_temp/Library/RcppArmadillo/include' -I'/Users/runner/work/_temp/Library/BH/include' -I/usr/local/include    -fPIC  -Wall -g -O2  -c splines.cpp -o splines.o
-    ## clang++ -mmacosx-version-min=10.13 -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I'/Users/runner/work/_temp/Library/Rcpp/include' -I'/Users/runner/work/_temp/Library/RcppArmadillo/include' -I'/Users/runner/work/_temp/Library/BH/include' -I/usr/local/include    -fPIC  -Wall -g -O2  -c tensor.cpp -o tensor.o
-    ## clang++ -mmacosx-version-min=10.13 -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o compboostSplines.so RcppExports.o center_matrices.o demmler_reinsch.o splines.o tensor.o -L/Library/Frameworks/R.framework/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Resources/lib -lRblas -L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin18/8.2.0 -L/usr/local/gfortran/lib -lgfortran -lquadmath -lm -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
-    ## ld: warning: dylib (/usr/local/gfortran/lib/libgfortran.dylib) was built for newer macOS version (10.14) than being linked (10.13)
-    ## ld: warning: dylib (/usr/local/gfortran/lib/libquadmath.dylib) was built for newer macOS version (10.14) than being linked (10.13)
-    ## installing to /Users/runner/work/_temp/Library/00LOCK-compboostSplines/00new/compboostSplines/libs
-    ## ** R
-    ## ** tests
-    ## ** byte-compile and prepare package for lazy loading
-    ## ** help
-    ## *** installing help indices
-    ## ** building package indices
-    ## ** testing if installed package can be loaded from temporary location
-    ## ** checking absolute paths in shared objects and dynamic libraries
-    ## ** testing if installed package can be loaded from final location
-    ## ** testing if installed package keeps a record of temporary installation path
-    ## * DONE (compboostSplines)
-
 [![R-CMD-check](https://github.com/schalkdaniel/compboostSplines/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schalkdaniel/compboostSplines/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/schalkdaniel/compboostSplines/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/compboostSplines)
 [![License: LGPL
@@ -98,29 +49,29 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 basis[1:10, 1:10]
-#>               [,1]       [,2]      [,3]       [,4]         [,5] [,6] [,7] [,8] [,9] [,10]
-#>  [1,] 1.666667e-01 0.66666667 0.1666667 0.00000000 0.0000000000    0    0    0    0     0
-#>  [2,] 6.692429e-02 0.60691150 0.3231583 0.00300590 0.0000000000    0    0    0    0     0
-#>  [3,] 1.203597e-02 0.42548261 0.5293589 0.03312249 0.0000000000    0    0    0    0     0
-#>  [4,] 1.180423e-03 0.27758648 0.6333278 0.08790530 0.0000000000    0    0    0    0     0
-#>  [5,] 2.011503e-04 0.22496566 0.6559344 0.11889876 0.0000000000    0    0    0    0     0
-#>  [6,] 7.395761e-05 0.20749081 0.6610708 0.13136446 0.0000000000    0    0    0    0     0
-#>  [7,] 6.314715e-05 0.20527551 0.6616201 0.13304128 0.0000000000    0    0    0    0     0
-#>  [8,] 0.000000e+00 0.12770600 0.6597598 0.21243208 0.0001021025    0    0    0    0     0
-#>  [9,] 0.000000e+00 0.06267074 0.6000287 0.33371129 0.0035893005    0    0    0    0     0
-#> [10,] 0.000000e+00 0.02679960 0.5060105 0.45136428 0.0158255883    0    0    0    0     0
+#>              [,1]       [,2]      [,3]         [,4]         [,5] [,6] [,7] [,8] [,9] [,10]
+#>  [1,] 0.166666667 0.66666667 0.1666667 0.000000e+00 0.0000000000    0    0    0    0     0
+#>  [2,] 0.137397362 0.66290097 0.1996613 4.038753e-05 0.0000000000    0    0    0    0     0
+#>  [3,] 0.132957646 0.66159342 0.2053853 6.365753e-05 0.0000000000    0    0    0    0     0
+#>  [4,] 0.028376319 0.51225485 0.4446072 1.476165e-02 0.0000000000    0    0    0    0     0
+#>  [5,] 0.008726429 0.39751898 0.5528898 4.086475e-02 0.0000000000    0    0    0    0     0
+#>  [6,] 0.000000000 0.11215656 0.6523140 2.352140e-01 0.0003153798    0    0    0    0     0
+#>  [7,] 0.000000000 0.10369088 0.6468246 2.489625e-01 0.0005220619    0    0    0    0     0
+#>  [8,] 0.000000000 0.09826255 0.6426961 2.583396e-01 0.0007017948    0    0    0    0     0
+#>  [9,] 0.000000000 0.04684948 0.5682074 3.781031e-01 0.0068399859    0    0    0    0     0
+#> [10,] 0.000000000 0.03956349 0.5492555 4.019762e-01 0.0092048340    0    0    0    0     0
 
 # You can also create sparse matrices:
 basis.sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis.sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 5 6 0 1 2 ...
-#>   ..@ p       : int [1:25] 0 7 17 27 40 51 65 84 106 128 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
+#>   ..@ p       : int [1:25] 0 5 17 33 51 70 82 93 105 115 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.166667 0.066924 0.012036 0.00118 0.000201 ...
+#>   ..@ x       : num [1:398] 0.16667 0.1374 0.13296 0.02838 0.00873 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -182,9 +133,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 46980601292
+#> [1] 23719580783
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 448.0386
+#> [1] 390.0661
 
 # This is now used for a new estimator:
 beta_df2 = solve(t(basis) %*% basis + penalty_df2 * K) %*% t(basis) %*% y
