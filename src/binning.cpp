@@ -17,10 +17,9 @@
 //'   Number of unique points for binning the vector x.
 //' @return \code{arma::vec} Vector of discretized x.
 //' @examples
-//' \dontrun{
 //' x = runif(100)
 //' binVectorCustom(x, 10)
-//' }
+//' @export
 // [[Rcpp::export]]
 arma::vec binVectorCustom (const arma::vec& x, const unsigned int n_bins)
 {
@@ -36,10 +35,9 @@ arma::vec binVectorCustom (const arma::vec& x, const unsigned int n_bins)
 //'   Vector that should be discretized.
 //' @return \code{arma::vec} Vector of discretized x.
 //' @examples
-//' \dontrun{
 //' x = runif(100)
 //' binVector(x)
-//' }
+//' @export
 // [[Rcpp::export]]
 arma::vec binVector (const arma::vec& x)
 {
@@ -61,6 +59,7 @@ arma::vec binVector (const arma::vec& x)
 //' bins = binVector(x)
 //' idx = calculateIndexVector(x, bins)
 //' data.frame(x = x, bins = bins[idx])
+//' @export
 // [[Rcpp::export]]
 arma::uvec calculateIndexVector (const arma::vec& x, const arma::vec& x_bins)
 {

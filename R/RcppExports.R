@@ -141,10 +141,9 @@ binnedSparseMatMultResponse <- function(X, y, k, w) {
 #'   Number of unique points for binning the vector x.
 #' @return \code{arma::vec} Vector of discretized x.
 #' @examples
-#' \dontrun{
 #' x = runif(100)
 #' binVectorCustom(x, 10)
-#' }
+#' @export
 binVectorCustom <- function(x, n_bins) {
     .Call(`_compboostSplines_binVectorCustom`, x, n_bins)
 }
@@ -157,10 +156,9 @@ binVectorCustom <- function(x, n_bins) {
 #'   Vector that should be discretized.
 #' @return \code{arma::vec} Vector of discretized x.
 #' @examples
-#' \dontrun{
 #' x = runif(100)
 #' binVector(x)
-#' }
+#' @export
 binVector <- function(x) {
     .Call(`_compboostSplines_binVector`, x)
 }
@@ -179,6 +177,7 @@ binVector <- function(x) {
 #' bins = binVector(x)
 #' idx = calculateIndexVector(x, bins)
 #' data.frame(x = x, bins = bins[idx])
+#' @export
 calculateIndexVector <- function(x, x_bins) {
     .Call(`_compboostSplines_calculateIndexVector`, x, x_bins)
 }

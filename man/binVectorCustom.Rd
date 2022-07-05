@@ -20,8 +20,6 @@ Number of unique points for binning the vector x.}
 This function returns a vector of equally spaced points of length n_bins.
 }
 \examples{
-\dontrun{
 x = runif(100)
 binVectorCustom(x, 10)
-}
 }

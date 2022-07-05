@@ -17,8 +17,6 @@ Vector that should be discretized.}
 This function returns a vector of equally spaced points of length the square root of the size of the vector.
 }
 \examples{
-\dontrun{
 x = runif(100)
 binVector(x)
-}
 }
