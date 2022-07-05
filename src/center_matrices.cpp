@@ -16,10 +16,10 @@
 //' x = runif(100)
 //' X1 = cbind(1, x, x^2, x^3, x^4)
 //' X2 = cbind(1, x)
-//' centerMatrix(X1, X2)
+//' getSubtractionRotation(X1, X2)
 //' @export
 // [[Rcpp::export]]
-arma::mat centerMatrix (const arma::mat& X1, const arma::mat& X2)
+arma::mat getSubtractionRotation (const arma::mat& X1, const arma::mat& X2)
 {
   // Cross Product X1 and X2
   arma::mat cross = X1.t() * X2;

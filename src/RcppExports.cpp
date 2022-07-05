@@ -11,6 +11,96 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// binnedMatMult
+arma::mat binnedMatMult(const arma::mat& X, const arma::uvec& k, const arma::vec& w, const bool use_fast_acc);
+RcppExport SEXP _compboostSplines_binnedMatMult(SEXP XSEXP, SEXP kSEXP, SEXP wSEXP, SEXP use_fast_accSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type w(wSEXP);
+    Rcpp::traits::input_parameter< const bool >::type use_fast_acc(use_fast_accSEXP);
+    rcpp_result_gen = Rcpp::wrap(binnedMatMult(X, k, w, use_fast_acc));
+    return rcpp_result_gen;
+END_RCPP
+}
+// binnedMatMultResponse
+arma::mat binnedMatMultResponse(const arma::mat& X, const arma::vec& y, const arma::uvec& k, const arma::vec& w);
+RcppExport SEXP _compboostSplines_binnedMatMultResponse(SEXP XSEXP, SEXP ySEXP, SEXP kSEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type w(wSEXP);
+    rcpp_result_gen = Rcpp::wrap(binnedMatMultResponse(X, y, k, w));
+    return rcpp_result_gen;
+END_RCPP
+}
+// binnedSparseMatMult
+arma::mat binnedSparseMatMult(const arma::sp_mat& X, const arma::uvec& k, const arma::vec& w);
+RcppExport SEXP _compboostSplines_binnedSparseMatMult(SEXP XSEXP, SEXP kSEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type w(wSEXP);
+    rcpp_result_gen = Rcpp::wrap(binnedSparseMatMult(X, k, w));
+    return rcpp_result_gen;
+END_RCPP
+}
+// binnedSparseMatMultResponse
+arma::mat binnedSparseMatMultResponse(const arma::sp_mat& X, const arma::vec& y, const arma::uvec& k, const arma::vec& w);
+RcppExport SEXP _compboostSplines_binnedSparseMatMultResponse(SEXP XSEXP, SEXP ySEXP, SEXP kSEXP, SEXP wSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const arma::uvec& >::type k(kSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type w(wSEXP);
+    rcpp_result_gen = Rcpp::wrap(binnedSparseMatMultResponse(X, y, k, w));
+    return rcpp_result_gen;
+END_RCPP
+}
+// binVectorCustom
+arma::vec binVectorCustom(const arma::vec& x, const unsigned int n_bins);
+RcppExport SEXP _compboostSplines_binVectorCustom(SEXP xSEXP, SEXP n_binsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const unsigned int >::type n_bins(n_binsSEXP);
+    rcpp_result_gen = Rcpp::wrap(binVectorCustom(x, n_bins));
+    return rcpp_result_gen;
+END_RCPP
+}
+// binVector
+arma::vec binVector(const arma::vec& x);
+RcppExport SEXP _compboostSplines_binVector(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(binVector(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// calculateIndexVector
+arma::uvec calculateIndexVector(const arma::vec& x, const arma::vec& x_bins);
+RcppExport SEXP _compboostSplines_calculateIndexVector(SEXP xSEXP, SEXP x_binsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::vec& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type x_bins(x_binsSEXP);
+    rcpp_result_gen = Rcpp::wrap(calculateIndexVector(x, x_bins));
+    return rcpp_result_gen;
+END_RCPP
+}
 // centerMatrix
 arma::mat centerMatrix(const arma::mat& X1, const arma::mat& X2);
 RcppExport SEXP _compboostSplines_centerMatrix(SEXP X1SEXP, SEXP X2SEXP) {
@@ -125,6 +215,13 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_compboostSplines_binnedMatMult", (DL_FUNC) &_compboostSplines_binnedMatMult, 4},
+    {"_compboostSplines_binnedMatMultResponse", (DL_FUNC) &_compboostSplines_binnedMatMultResponse, 4},
+    {"_compboostSplines_binnedSparseMatMult", (DL_FUNC) &_compboostSplines_binnedSparseMatMult, 3},
+    {"_compboostSplines_binnedSparseMatMultResponse", (DL_FUNC) &_compboostSplines_binnedSparseMatMultResponse, 4},
+    {"_compboostSplines_binVectorCustom", (DL_FUNC) &_compboostSplines_binVectorCustom, 2},
+    {"_compboostSplines_binVector", (DL_FUNC) &_compboostSplines_binVector, 1},
+    {"_compboostSplines_calculateIndexVector", (DL_FUNC) &_compboostSplines_calculateIndexVector, 2},
     {"_compboostSplines_centerMatrix", (DL_FUNC) &_compboostSplines_centerMatrix, 2},
     {"_compboostSplines_demmlerReinsch", (DL_FUNC) &_compboostSplines_demmlerReinsch, 3},
     {"_compboostSplines_penaltyMat", (DL_FUNC) &_compboostSplines_penaltyMat, 2},
