@@ -175,12 +175,10 @@ binVector <- function(x) {
 #'   Vector of unique values for binning.
 #' @return \code{arma::uvec} Index vector.
 #' @examples
-#' \dontrun{
 #' x = runif(100)
 #' bins = binVector(x)
 #' idx = calculateIndexVector(x, bins)
-#' data.frame(x = x, x_bins = bins[idx])
-#' }
+#' data.frame(x = x, bins = bins[idx])
 calculateIndexVector <- function(x, x_bins) {
     .Call(`_compboostSplines_calculateIndexVector`, x, x_bins)
 }
@@ -198,10 +196,10 @@ calculateIndexVector <- function(x, x_bins) {
 #' x = runif(100)
 #' X1 = cbind(1, x, x^2, x^3, x^4)
 #' X2 = cbind(1, x)
-#' centerMatrix(X1, X2)
+#' getSubtractionRotation(X1, X2)
 #' @export
-centerMatrix <- function(X1, X2) {
-    .Call(`_compboostSplines_centerMatrix`, X1, X2)
+getSubtractionRotation <- function(X1, X2) {
+    .Call(`_compboostSplines_getSubtractionRotation`, X1, X2)
 }
 
 #' Transform degrees of freedom to lambda

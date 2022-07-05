@@ -101,15 +101,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// centerMatrix
-arma::mat centerMatrix(const arma::mat& X1, const arma::mat& X2);
-RcppExport SEXP _compboostSplines_centerMatrix(SEXP X1SEXP, SEXP X2SEXP) {
+// getSubtractionRotation
+arma::mat getSubtractionRotation(const arma::mat& X1, const arma::mat& X2);
+RcppExport SEXP _compboostSplines_getSubtractionRotation(SEXP X1SEXP, SEXP X2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const arma::mat& >::type X1(X1SEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type X2(X2SEXP);
-    rcpp_result_gen = Rcpp::wrap(centerMatrix(X1, X2));
+    rcpp_result_gen = Rcpp::wrap(getSubtractionRotation(X1, X2));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -222,7 +222,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_compboostSplines_binVectorCustom", (DL_FUNC) &_compboostSplines_binVectorCustom, 2},
     {"_compboostSplines_binVector", (DL_FUNC) &_compboostSplines_binVector, 1},
     {"_compboostSplines_calculateIndexVector", (DL_FUNC) &_compboostSplines_calculateIndexVector, 2},
-    {"_compboostSplines_centerMatrix", (DL_FUNC) &_compboostSplines_centerMatrix, 2},
+    {"_compboostSplines_getSubtractionRotation", (DL_FUNC) &_compboostSplines_getSubtractionRotation, 2},
     {"_compboostSplines_demmlerReinsch", (DL_FUNC) &_compboostSplines_demmlerReinsch, 3},
     {"_compboostSplines_penaltyMat", (DL_FUNC) &_compboostSplines_penaltyMat, 2},
     {"_compboostSplines_findSpan", (DL_FUNC) &_compboostSplines_findSpan, 2},
