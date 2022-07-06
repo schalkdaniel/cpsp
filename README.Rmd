@@ -18,7 +18,7 @@ devtools::install(quite = TRUE, upgrade = "always")
 
 ## C++ Spline Implementation
 
-The `pcsp` (__former `compboostSplines`__) package provides a pure spline implementation written in `C++`. This repository can be used for spline regression and non-parametric modelling of numerical features. The functionality contains the basis creation, the Demmler-Reinsch-Orthogonalization, building tensor products, an efficient discretization technique to save memory, as well as a method to subtract matrix bases.
+The `cpsp` (__former `compboostSplines`__) package provides a pure spline implementation written in `C++`. This repository can be used for spline regression and non-parametric modelling of numerical features. The functionality contains the basis creation, the Demmler-Reinsch-Orthogonalization, building tensor products, an efficient discretization technique to save memory, as well as a method to subtract matrix bases.
 
 **Feel free to extend the algorithms, improve performance, or use for your own projets.**
 
