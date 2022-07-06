@@ -209,6 +209,8 @@ head(data.frame(x = x, bins = bins[idx]))
 For spline regression, we can build the basis just using the bins and use this (much) smaller design matrix with the optimized algorithms:
 
 ```{r}
+library(Matrix)
+
 w = rep(1, length(idx))
 basis_bin = createSparseSplineBasis(values = bins, degree = 3, knots = knots)
 xtx = binnedSparseMatMult(t(basis_bin), idx - 1, w)
