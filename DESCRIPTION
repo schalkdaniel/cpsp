@@ -14,6 +14,7 @@ Depends:
     R (>= 3.5.0)
 Imports:
     Rcpp,
+    RcppArmadillo,
     Matrix
 LinkingTo:
     Rcpp,
