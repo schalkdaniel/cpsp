@@ -1,3 +1,12 @@
-other
-.travis.yml
-^appveyor\.yml$
+other/*
+.git/*
+.github
+paper/*
+Readme_files/*
+.gitignore
+.lintr
+LICENSE
+README.*
+temp/*
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md

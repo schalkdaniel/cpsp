@@ -20,8 +20,8 @@ Vector of unique values for binning.}
 This function returns the indexes of the unique values to the complete binned vector.
 }
 \examples{
-x = runif(100)
+x = runif(10000)
 bins = binVector(x)
 idx = calculateIndexVector(x, bins)
-data.frame(x = x, bins = bins[idx])
+head(data.frame(x = x, bins = bins[idx + 1]))
 }

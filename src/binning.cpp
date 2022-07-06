@@ -55,10 +55,10 @@ arma::vec binVector (const arma::vec& x)
 //'   Vector of unique values for binning.
 //' @return \code{arma::uvec} Index vector.
 //' @examples
-//' x = runif(100)
+//' x = runif(10000)
 //' bins = binVector(x)
 //' idx = calculateIndexVector(x, bins)
-//' data.frame(x = x, bins = bins[idx])
+//' head(data.frame(x = x, bins = bins[idx + 1]))
 //' @export
 // [[Rcpp::export]]
 arma::uvec calculateIndexVector (const arma::vec& x, const arma::vec& x_bins)

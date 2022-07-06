@@ -173,10 +173,10 @@ binVector <- function(x) {
 #'   Vector of unique values for binning.
 #' @return \code{arma::uvec} Index vector.
 #' @examples
-#' x = runif(100)
+#' x = runif(10000)
 #' bins = binVector(x)
 #' idx = calculateIndexVector(x, bins)
-#' data.frame(x = x, bins = bins[idx])
+#' head(data.frame(x = x, bins = bins[idx + 1]))
 #' @export
 calculateIndexVector <- function(x, x_bins) {
     .Call(`_compboostSplines_calculateIndexVector`, x, x_bins)
