@@ -1,18 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![R-CMD-check](https://github.com/schalkdaniel/compboostSplines/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schalkdaniel/compboostSplines/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/schalkdaniel/compboostSplines/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/compboostSplines)
+[![R-CMD-check](https://github.com/schalkdaniel/cpsp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schalkdaniel/cpsp/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/schalkdaniel/cpsp/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/cpsp)
 [![License: LGPL
 v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
-## C++ Spline Implementation of Compboost
+## C++ Spline Implementation
 
-Pure spline implementation of [compboost](https://compboost.org). This
-repository can be used for spline regression and non-parametric
-modelling of numerical features. The functionality contains the basis
-creation, the Demmler-Reinsch-Orthogonalization, as well as a method to
-subtract matrix bases.
+The `pcsp` (**former `compboostSplines`**) package provides a pure
+spline implementation written in `C++`. This repository can be used for
+spline regression and non-parametric modelling of numerical features.
+The functionality contains the basis creation, the
+Demmler-Reinsch-Orthogonalization, building tensor products, an
+efficient discretization technique to save memory, as well as a method
+to subtract matrix bases.
 
 **Feel free to extend the algorithms, improve performance, or use for
 your own projets.**
@@ -22,16 +24,10 @@ your own projets.**
 #### Developer version:
 
 ``` r
-devtools::install_github("schalkdaniel/compboostSplines")
+remotes::install_github("schalkdaniel/cpsp", ref = "main")
 ```
 
 ## Examples
-
-<!--
-- [Spline basis](#spline-basis)
-- [Spline regression](#spline-regression)
-- [Demmler-Reinsch-Orthogonalization](#demmler-reinsch-orthogonalization)
--->
 
 ### Spline basis
 
@@ -39,7 +35,7 @@ To create a spline basis call `createSplineBasis()` (for dense matrices)
 and `createSparseSplineBasis()` (for sparse matrices):
 
 ``` r
-library(compboostSplines)
+library(cpsp)
 
 nsim = 100
 
@@ -53,19 +49,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.166667 0.081465 0.046088 0.000153 0 ...
+#>  num [1:100, 1:24] 0.16667 0.15486 0.03907 0.00463 0 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
 #>   ..@ i       : int [1:398] 0 1 2 3 0 1 2 3 4 5 ...
-#>   ..@ p       : int [1:25] 0 4 11 24 42 60 77 95 112 132 ...
+#>   ..@ p       : int [1:25] 0 4 11 20 31 45 63 84 108 132 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.166667 0.081465 0.046088 0.000153 0.666667 ...
+#>   ..@ x       : num [1:398] 0.16667 0.15486 0.03907 0.00463 0.66667 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -145,9 +141,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 51056049767
+#> [1] 48272222278
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 401.9474
+#> [1] 414.5665
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -255,13 +251,13 @@ bins = binVectorCustom(x, 30)
 idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
-#>           x      bins
-#> 1 0.1165277 0.1165277
-#> 2 0.2161259 0.1165277
-#> 3 0.2800424 0.1165277
-#> 4 0.5401440 0.4562862
-#> 5 0.9521986 0.7960447
-#> 6 0.9572927 0.7960447
+#>            x      bins
+#> 1 0.01340440 0.0134044
+#> 2 0.02483892 0.0134044
+#> 3 0.19459904 0.3556190
+#> 4 0.34288237 0.3556190
+#> 5 0.51974883 0.3556190
+#> 6 0.87112627 1.0400482
 ```
 
 For spline regression, we can build the basis just using the bins and
