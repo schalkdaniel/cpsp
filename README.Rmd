@@ -180,15 +180,12 @@ ggplot() +
 If we use the non-linear effect from the first examples, we observe that both, the reduced and full design matrix can capture the non-linear effect. The only differences observable is the shift on the y axis which results from the subtraction of a constant, meaning that the estimated effect is always centered around zero if the design matrix of the linear effect contains a constant column:
 
 ```{r}
-beta_full_nl = myEstimator(basis, y)
 beta_nonlinear_nl = myEstimator(X_nonlinear, y)
-
-pred_full_nl = basis %*% beta_full_nl
 pred_nonlinear_nl = X_nonlinear %*% beta_nonlinear_nl
 
 df_plot_nl = data.frame(
   x = rep(x, 2),
-  y = c(pred_nonlinear_nl, pred_full_nl),
+  y = c(pred_nonlinear_nl, basis %*% beta),
   type = rep(c("Non linear effect", "Full effect"), each = length(x)))
 
 ggplot() +
@@ -204,7 +201,10 @@ Using binning allows to reduce the number of observations in the design matrix. 
 
 ```{r}
 bins = binVectorCustom(x, 50)
-idx = calculateIndexVector(x, bins) + 1 # Note the shift from C++ to R in indexing
+
+# Note the +1 shift induced by the C++ indexing starting at 0 not 1
+idx = calculateIndexVector(x, bins) + 1
+
 head(data.frame(x = x, bins = bins[idx]))
 ```
 
