@@ -71,9 +71,11 @@ With that, it is straight forward to use the least squares estimator for spline 
 
 ```{r}
 # Custom function to estimate the least squares estimator
-myEstimator = function(X, y, penmat = 0) {
-  xtx = crossprod(X)
-  xty = crossprod(X, y)
+myEstimator = function(X, y, penmat = 0, xtx = NULL, xty = NULL) {
+  if (! (missing(X) || missing(y))) {
+    xtx = crossprod(X)
+    xty = crossprod(X, y)
+  }
   L = chol(xtx + penmat)
   z = backsolve(L, xty, transpose = TRUE)
   return(as.vector(backsolve(L, z)))
@@ -200,7 +202,7 @@ ggplot() +
 Using binning allows to reduce the number of observations in the design matrix. Therefore, the vector `x` is discretized into a smaller amount of bins. Furthermore, a mapping keeps the information, which of the bins represents which original value. Efficient algorithms are design based on this information:
 
 ```{r}
-bins = binVectorCustom(x, 50)
+bins = binVectorCustom(x, 30)
 
 # Note the +1 shift induced by the C++ indexing starting at 0 not 1
 idx = calculateIndexVector(x, bins) + 1
@@ -226,7 +228,8 @@ object.size(basis)
 
 # Calculate estimator:
 xtx = binnedSparseMatMult(t(basis_bin), idx - 1, w)
-beta_bin = solve(xtx) %*% binnedSparseMatMultResponse(t(basis_bin), y, idx - 1, w)
+xty = binnedSparseMatMultResponse(t(basis_bin), y, idx - 1, w)
+beta_bin = myEstimator(xtx = xtx, xty = xty)
 
 df_bin = data.frame(
   x = rep(x, 2),
@@ -236,5 +239,6 @@ df_bin = data.frame(
 ggplot() + geom_point(data = plot_df, mapping = aes(x = x, y = y)) +
   geom_line(data = df_bin, mapping = aes(x = x, y = y, color = binning)) +
   theme_tufte() +
+  geom_rug(aes(x = bins)) +
   scale_color_brewer(palette = "Set1")
 ```

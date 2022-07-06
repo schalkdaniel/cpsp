@@ -53,19 +53,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.167 0 0 0 0 ...
+#>  num [1:100, 1:24] 0.1667 0.1377 0.0812 0.0228 0.0119 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 0 1 2 3 4 5 0 1 2 ...
-#>   ..@ p       : int [1:25] 0 1 7 16 29 46 59 74 89 103 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 5 0 1 2 3 ...
+#>   ..@ p       : int [1:25] 0 6 16 30 47 62 79 94 109 123 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.166667 0.666667 0.142661 0.117656 0.000253 ...
+#>   ..@ x       : num [1:398] 0.1667 0.1377 0.0812 0.0228 0.0119 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -82,9 +82,11 @@ spline regression:
 
 ``` r
 # Custom function to estimate the least squares estimator
-myEstimator = function(X, y, penmat = 0) {
-  xtx = crossprod(X)
-  xty = crossprod(X, y)
+myEstimator = function(X, y, penmat = 0, xtx = NULL, xty = NULL) {
+  if (! (missing(X) || missing(y))) {
+    xtx = crossprod(X)
+    xty = crossprod(X, y)
+  }
   L = chol(xtx + penmat)
   z = backsolve(L, xty, transpose = TRUE)
   return(as.vector(backsolve(L, z)))
@@ -113,6 +115,7 @@ beta_pen = myEstimator(basis, y, penalty * K)
 # Lets visualize the curves:
 
 library(ggplot2)
+#> Keep up to date with changes at https://www.tidyverse.org/blog/
 library(ggthemes)
 
 plot_df = data.frame(
@@ -143,9 +146,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 729436730
+#> [1] 15192180402
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 381.8
+#> [1] 411.6
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -247,19 +250,19 @@ represents which original value. Efficient algorithms are design based
 on this information:
 
 ``` r
-bins = binVectorCustom(x, 50)
+bins = binVectorCustom(x, 30)
 
 # Note the +1 shift induced by the C++ indexing starting at 0 not 1
 idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
 #>        x   bins
-#> 1 0.0332 0.0332
-#> 2 0.5236 0.4333
-#> 3 0.5511 0.6334
-#> 4 0.9131 0.8334
-#> 5 0.9252 0.8334
-#> 6 0.9621 1.0335
+#> 1 0.2833 0.2833
+#> 2 0.3110 0.2833
+#> 3 0.3791 0.2833
+#> 4 0.5013 0.6089
+#> 5 0.5466 0.6089
+#> 6 0.6377 0.6089
 ```
 
 For spline regression, we can build the basis just using the bins and
@@ -277,13 +280,14 @@ basis_bin = createSparseSplineBasis(values = bins, degree = 3, knots = knots)
 
 # Compare object sizes:
 object.size(basis_bin)
-#> 3968 bytes
+#> 3040 bytes
 object.size(basis)
 #> 19416 bytes
 
 # Calculate estimator:
 xtx = binnedSparseMatMult(t(basis_bin), idx - 1, w)
-beta_bin = solve(xtx) %*% binnedSparseMatMultResponse(t(basis_bin), y, idx - 1, w)
+xty = binnedSparseMatMultResponse(t(basis_bin), y, idx - 1, w)
+beta_bin = myEstimator(xtx = xtx, xty = xty)
 
 df_bin = data.frame(
   x = rep(x, 2),
@@ -293,6 +297,7 @@ df_bin = data.frame(
 ggplot() + geom_point(data = plot_df, mapping = aes(x = x, y = y)) +
   geom_line(data = df_bin, mapping = aes(x = x, y = y, color = binning)) +
   theme_tufte() +
+  geom_rug(aes(x = bins)) +
   scale_color_brewer(palette = "Set1")
 ```
 
