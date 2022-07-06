@@ -53,19 +53,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.16667 0.03642 0.01341 0.00912 0.00118 ...
+#>  num [1:100, 1:24] 0.16667 0.11732 0.10405 0.01387 0.00894 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
 #>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
-#>   ..@ p       : int [1:25] 0 5 13 24 41 62 85 107 128 145 ...
+#>   ..@ p       : int [1:25] 0 5 17 37 61 84 104 121 134 151 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.16667 0.03642 0.01341 0.00912 0.00118 ...
+#>   ..@ x       : num [1:398] 0.16667 0.11732 0.10405 0.01387 0.00894 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -143,9 +143,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 1.051e+11
+#> [1] 121718933319
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 436.7
+#> [1] 418.4953
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -221,15 +221,12 @@ effect is always centered around zero if the design matrix of the linear
 effect contains a constant column:
 
 ``` r
-beta_full_nl = myEstimator(basis, y)
 beta_nonlinear_nl = myEstimator(X_nonlinear, y)
-
-pred_full_nl = basis %*% beta_full_nl
 pred_nonlinear_nl = X_nonlinear %*% beta_nonlinear_nl
 
 df_plot_nl = data.frame(
   x = rep(x, 2),
-  y = c(pred_nonlinear_nl, pred_full_nl),
+  y = c(pred_nonlinear_nl, basis %*% beta),
   type = rep(c("Non linear effect", "Full effect"), each = length(x)))
 
 ggplot() +
@@ -251,15 +248,18 @@ on this information:
 
 ``` r
 bins = binVectorCustom(x, 50)
-idx = calculateIndexVector(x, bins) + 1 # Note the shift from C++ to R in indexing
+
+# Note the +1 shift induced by the C++ indexing starting at 0 not 1
+idx = calculateIndexVector(x, bins) + 1
+
 head(data.frame(x = x, bins = bins[idx]))
-#>         x    bins
-#> 1 0.02933 0.02933
-#> 2 0.21807 0.23274
-#> 3 0.29906 0.23274
-#> 4 0.32377 0.23274
-#> 5 0.41275 0.43615
-#> 6 0.51136 0.43615
+#>            x       bins
+#> 1 0.03821118 0.03821118
+#> 2 0.09044030 0.03821118
+#> 3 0.10694548 0.03821118
+#> 4 0.30465960 0.24089488
+#> 5 0.33279673 0.24089488
+#> 6 0.71016360 0.64626228
 ```
 
 For spline regression, we can build the basis just using the bins and
