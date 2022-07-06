@@ -14,7 +14,7 @@ options(width = 100)
 devtools::install(quite = TRUE, upgrade = "always")
 ```
 
-[![R-CMD-check](https://github.com/schalkdaniel/cpsp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schalkdaniel/cpsp/actions/workflows/R-CMD-check.yaml) [![codecov](https://codecov.io/gh/schalkdaniel/cpsp/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/cpsp) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![R-CMD-check](https://github.com/schalkdaniel/cpsp/actions/workflows/check-full.yaml/badge.svg)](https://github.com/schalkdaniel/cpsp/actions/workflows/check-full.yaml) [![codecov](https://codecov.io/gh/schalkdaniel/cpsp/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/cpsp) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
 ## C++ Spline Implementation
 
