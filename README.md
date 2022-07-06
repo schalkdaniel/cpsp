@@ -53,19 +53,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.1667 0.1377 0.0812 0.0228 0.0119 ...
+#>  num [1:100, 1:24] 0.16667 0.12002 0.02837 0.00313 0.00128 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 5 0 1 2 3 ...
-#>   ..@ p       : int [1:25] 0 6 16 30 47 62 79 94 109 123 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
+#>   ..@ p       : int [1:25] 0 5 18 33 52 75 93 112 129 140 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.1667 0.1377 0.0812 0.0228 0.0119 ...
+#>   ..@ x       : num [1:398] 0.16667 0.12002 0.02837 0.00313 0.00128 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -115,7 +115,6 @@ beta_pen = myEstimator(basis, y, penalty * K)
 # Lets visualize the curves:
 
 library(ggplot2)
-#> Keep up to date with changes at https://www.tidyverse.org/blog/
 library(ggthemes)
 
 plot_df = data.frame(
@@ -146,9 +145,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 15192180402
+#> [1] 50621519954
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 411.6
+#> [1] 437.8199
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -256,13 +255,13 @@ bins = binVectorCustom(x, 30)
 idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
-#>        x   bins
-#> 1 0.2833 0.2833
-#> 2 0.3110 0.2833
-#> 3 0.3791 0.2833
-#> 4 0.5013 0.6089
-#> 5 0.5466 0.6089
-#> 6 0.6377 0.6089
+#>           x      bins
+#> 1 0.1349287 0.1349287
+#> 2 0.1827230 0.1349287
+#> 3 0.3404588 0.4687915
+#> 4 0.4734879 0.4687915
+#> 5 0.5049613 0.4687915
+#> 6 0.6920851 0.8026543
 ```
 
 For spline regression, we can build the basis just using the bins and
