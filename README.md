@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![R-CMD-check](https://github.com/schalkdaniel/cpsp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schalkdaniel/cpsp/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/schalkdaniel/cpsp/actions/workflows/check-full.yaml/badge.svg)](https://github.com/schalkdaniel/cpsp/actions/workflows/check-full.yaml)
 [![codecov](https://codecov.io/gh/schalkdaniel/cpsp/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/cpsp)
 [![License: LGPL
 v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
@@ -49,19 +49,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 1.67e-01 1.08e-01 2.06e-02 3.27e-04 1.28e-05 ...
+#>  num [1:100, 1:24] 0.1667 0.1352 0.0832 0.0755 0.0609 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
-#>   ..@ p       : int [1:25] 0 5 15 32 56 80 103 126 142 160 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 5 6 7 0 1 ...
+#>   ..@ p       : int [1:25] 0 8 23 40 65 87 108 130 147 164 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 1.67e-01 1.08e-01 2.06e-02 3.27e-04 1.28e-05 ...
+#>   ..@ x       : num [1:398] 0.1667 0.1352 0.0832 0.0755 0.0609 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -141,9 +141,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 20760512850
+#> [1] 1.02076e+11
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 391.2356
+#> [1] 439.9171
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -251,13 +251,13 @@ bins = binVectorCustom(x, 30)
 idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
-#>            x       bins
-#> 1 0.01257407 0.01257407
-#> 2 0.07670798 0.01257407
-#> 3 0.24987570 0.35471843
-#> 4 0.42592403 0.35471843
-#> 5 0.46498147 0.35471843
-#> 6 0.62828447 0.69686280
+#>           x      bins
+#> 1 0.3159971 0.3159971
+#> 2 0.3469970 0.3159971
+#> 3 0.4110397 0.3159971
+#> 4 0.4226494 0.3159971
+#> 5 0.4469811 0.3159971
+#> 6 0.5170778 0.6488035
 ```
 
 For spline regression, we can build the basis just using the bins and
