@@ -156,7 +156,7 @@ ggplot() +
   theme_tufte()
 ```
 
-The linear effect is expressed in the design matrix `(1, x)`. With `centerMatrix()` we can generate a rotation matrix which is used to rotate the design matrix that the linear effect cannot modelled anymore while the full design matrix still models the linear effect:
+The linear effect is expressed in the design matrix `(1, x)`. With `getSubtractionRotation()` we can generate a rotation matrix which is used to rotate the design matrix that the linear effect cannot modelled anymore while the full design matrix still models the linear effect:
 
 ```{r}
 X_linear = cbind(1, x)
