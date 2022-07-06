@@ -53,19 +53,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.16667 0.11732 0.10405 0.01387 0.00894 ...
+#>  num [1:100, 1:24] 0.1667 0.1588 0.0229 0.0138 0.0123 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
-#>   ..@ p       : int [1:25] 0 5 17 37 61 84 104 121 134 151 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 5 0 1 2 3 ...
+#>   ..@ p       : int [1:25] 0 6 14 26 45 67 92 115 135 150 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.16667 0.11732 0.10405 0.01387 0.00894 ...
+#>   ..@ x       : num [1:398] 0.1667 0.1588 0.0229 0.0138 0.0123 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -143,9 +143,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 121718933319
+#> [1] 40261926383
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 418.4953
+#> [1] 424.5511
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -188,9 +188,9 @@ ggplot() +
 ![](Readme_files/unnamed-chunk-6-1.png)<!-- -->
 
 The linear effect is expressed in the design matrix `(1, x)`. With
-`centerMatrix()` we can generate a rotation matrix which is used to
-rotate the design matrix that the linear effect cannot modelled anymore
-while the full design matrix still models the linear effect:
+`getSubtractionRotation()` we can generate a rotation matrix which is
+used to rotate the design matrix that the linear effect cannot modelled
+anymore while the full design matrix still models the linear effect:
 
 ``` r
 X_linear = cbind(1, x)
@@ -253,13 +253,13 @@ bins = binVectorCustom(x, 50)
 idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
-#>            x       bins
-#> 1 0.03821118 0.03821118
-#> 2 0.09044030 0.03821118
-#> 3 0.10694548 0.03821118
-#> 4 0.30465960 0.24089488
-#> 5 0.33279673 0.24089488
-#> 6 0.71016360 0.64626228
+#>           x      bins
+#> 1 0.1337063 0.1337063
+#> 2 0.1411072 0.1337063
+#> 3 0.3584160 0.3327428
+#> 4 0.3957605 0.3327428
+#> 5 0.4034471 0.3327428
+#> 6 0.5372951 0.5317792
 ```
 
 For spline regression, we can build the basis just using the bins and
