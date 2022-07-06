@@ -1,4 +1,4 @@
 library(testthat)
-library(compboostSplines)
+library(cpsp)
 
-test_check("compboostSplines")
+test_check("cpsp")
