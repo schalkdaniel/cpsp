@@ -49,19 +49,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.16667 0.16515 0.11074 0.01184 0.00708 ...
+#>  num [1:100, 1:24] 1.67e-01 1.08e-01 2.06e-02 3.27e-04 1.28e-05 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 5 0 1 2 3 ...
-#>   ..@ p       : int [1:25] 0 6 16 30 49 70 94 118 141 160 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
+#>   ..@ p       : int [1:25] 0 5 15 32 56 80 103 126 142 160 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.16667 0.16515 0.11074 0.01184 0.00708 ...
+#>   ..@ x       : num [1:398] 1.67e-01 1.08e-01 2.06e-02 3.27e-04 1.28e-05 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -141,9 +141,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 29828308765
+#> [1] 20760512850
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 430.0892
+#> [1] 391.2356
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -252,12 +252,12 @@ idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
 #>            x       bins
-#> 1 0.03048257 0.03048257
-#> 2 0.03192065 0.03048257
-#> 3 0.09084097 0.03048257
-#> 4 0.30801922 0.37355280
-#> 5 0.33897180 0.37355280
-#> 6 0.40255211 0.37355280
+#> 1 0.01257407 0.01257407
+#> 2 0.07670798 0.01257407
+#> 3 0.24987570 0.35471843
+#> 4 0.42592403 0.35471843
+#> 5 0.46498147 0.35471843
+#> 6 0.62828447 0.69686280
 ```
 
 For spline regression, we can build the basis just using the bins and
