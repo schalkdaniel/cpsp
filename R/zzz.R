@@ -2,6 +2,5 @@
 NULL
 
 #' @import Rcpp
-#' @import RcppArmadillo
 #' @import Matrix
 NULL
