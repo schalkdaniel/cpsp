@@ -49,19 +49,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.1667 0.0278 0.0273 0.0259 0.0186 ...
+#>  num [1:100, 1:24] 0.16667 0.00728 0.00342 0 0 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
-#>   ..@ p       : int [1:25] 0 5 17 34 56 80 105 129 150 170 ...
+#>   ..@ i       : int [1:398] 0 1 2 0 1 2 3 4 5 6 ...
+#>   ..@ p       : int [1:25] 0 3 10 24 42 63 87 110 130 154 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.1667 0.0278 0.0273 0.0259 0.0186 ...
+#>   ..@ x       : num [1:398] 0.16667 0.00728 0.00342 0.66667 0.38296 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -141,9 +141,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 42909281318
+#> [1] 58987214677
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 426.2904
+#> [1] 400.4572
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -252,12 +252,12 @@ idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
 #>            x       bins
-#> 1 0.05273414 0.05273414
-#> 2 0.26458856 0.39402948
-#> 3 0.26626873 0.39402948
-#> 4 0.27058183 0.39402948
-#> 5 0.29699797 0.39402948
-#> 6 0.52537344 0.39402948
+#> 1 0.05403692 0.05403692
+#> 2 0.35810175 0.39394676
+#> 3 0.39497409 0.39394676
+#> 4 0.57177026 0.73385660
+#> 5 0.61706966 0.73385660
+#> 6 0.79349607 0.73385660
 ```
 
 For spline regression, we can build the basis just using the bins and
