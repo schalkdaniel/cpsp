@@ -53,19 +53,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.1667 0.1588 0.0229 0.0138 0.0123 ...
+#>  num [1:100, 1:24] 0.167 0 0 0 0 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 5 0 1 2 3 ...
-#>   ..@ p       : int [1:25] 0 6 14 26 45 67 92 115 135 150 ...
+#>   ..@ i       : int [1:398] 0 0 1 2 3 4 5 0 1 2 ...
+#>   ..@ p       : int [1:25] 0 1 7 16 29 46 59 74 89 103 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.1667 0.1588 0.0229 0.0138 0.0123 ...
+#>   ..@ x       : num [1:398] 0.166667 0.666667 0.142661 0.117656 0.000253 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -143,9 +143,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 40261926383
+#> [1] 729436730
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 424.5511
+#> [1] 381.8
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -253,23 +253,35 @@ bins = binVectorCustom(x, 50)
 idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
-#>           x      bins
-#> 1 0.1337063 0.1337063
-#> 2 0.1411072 0.1337063
-#> 3 0.3584160 0.3327428
-#> 4 0.3957605 0.3327428
-#> 5 0.4034471 0.3327428
-#> 6 0.5372951 0.5317792
+#>        x   bins
+#> 1 0.0332 0.0332
+#> 2 0.5236 0.4333
+#> 3 0.5511 0.6334
+#> 4 0.9131 0.8334
+#> 5 0.9252 0.8334
+#> 6 0.9621 1.0335
 ```
 
 For spline regression, we can build the basis just using the bins and
 use this (much) smaller design matrix with the optimized algorithms:
 
 ``` r
+# To process sparse matrices we have to load the `Matrix` package:
 library(Matrix)
 
+# Dummy weight vector:
 w = rep(1, length(idx))
+
+# Design matrix based on the bins (not the full vector):
 basis_bin = createSparseSplineBasis(values = bins, degree = 3, knots = knots)
+
+# Compare object sizes:
+object.size(basis_bin)
+#> 3968 bytes
+object.size(basis)
+#> 19416 bytes
+
+# Calculate estimator:
 xtx = binnedSparseMatMult(t(basis_bin), idx - 1, w)
 beta_bin = solve(xtx) %*% binnedSparseMatMultResponse(t(basis_bin), y, idx - 1, w)
 

@@ -211,10 +211,20 @@ head(data.frame(x = x, bins = bins[idx]))
 For spline regression, we can build the basis just using the bins and use this (much) smaller design matrix with the optimized algorithms:
 
 ```{r}
+# To process sparse matrices we have to load the `Matrix` package:
 library(Matrix)
 
+# Dummy weight vector:
 w = rep(1, length(idx))
+
+# Design matrix based on the bins (not the full vector):
 basis_bin = createSparseSplineBasis(values = bins, degree = 3, knots = knots)
+
+# Compare object sizes:
+object.size(basis_bin)
+object.size(basis)
+
+# Calculate estimator:
 xtx = binnedSparseMatMult(t(basis_bin), idx - 1, w)
 beta_bin = solve(xtx) %*% binnedSparseMatMultResponse(t(basis_bin), y, idx - 1, w)
 
