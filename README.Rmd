@@ -142,6 +142,7 @@ ggplot() + geom_point(data = plot_df, mapping = aes(x = x, y = y)) +
   theme_tufte() +
   scale_color_brewer(palette = "Set1")
 ```
+
 ### Subtract model effects
 
 The idea of subtracting effects is to not let a design matrix model the effect represented in another matrix. For example, let's define a linear effect:
@@ -151,7 +152,8 @@ y_linear = 2 + 1.5 * x + rnorm(nsim)
 df_linear = data.frame(x = x, y = y_linear)
 
 ggplot() +
-  geom_point(data = df_linear, aes(x = x, y = y))
+  geom_point(data = df_linear, aes(x = x, y = y)) +
+  theme_tufte()
 ```
 
 The linear effect is expressed in the design matrix `(1, x)`. With `centerMatrix()` we can generate a rotation matrix which is used to rotate the design matrix that the linear effect cannot modelled anymore while the full design matrix still models the linear effect:
@@ -168,7 +170,7 @@ df_plot = data.frame(
   y = c(pred_nonlinear, pred_full),
   type = rep(c("Non linear effect", "Full effect"), each = length(x)))
 
-gg_without_linear = ggplot() +
+ggplot() +
   geom_point(data = data.frame(x = x, y = y_linear), aes(x = x, y = y)) +
   geom_line(data = df_plot, aes(x = x, y = y, color = type)) +
   theme_tufte() +

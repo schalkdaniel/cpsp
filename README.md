@@ -53,19 +53,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.166667 0.160172 0.066701 0.006193 0.000772 ...
+#>  num [1:100, 1:24] 0.16667 0.03642 0.01341 0.00912 0.00118 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 4 5 0 1 2 3 ...
-#>   ..@ p       : int [1:25] 0 6 13 23 39 56 74 96 115 133 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
+#>   ..@ p       : int [1:25] 0 5 13 24 41 62 85 107 128 145 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.166667 0.160172 0.066701 0.006193 0.000772 ...
+#>   ..@ x       : num [1:398] 0.16667 0.03642 0.01341 0.00912 0.00118 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -143,9 +143,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 60887840449
+#> [1] 1.051e+11
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 440.7964
+#> [1] 436.7
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -168,8 +168,9 @@ ggplot() + geom_point(data = plot_df, mapping = aes(x = x, y = y)) +
   scale_color_brewer(palette = "Set1")
 ```
 
-![](Readme_files/unnamed-chunk-5-1.png)<!-- --> \#\#\# Subtract model
-effects
+![](Readme_files/unnamed-chunk-5-1.png)<!-- -->
+
+### Subtract model effects
 
 The idea of subtracting effects is to not let a design matrix model the
 effect represented in another matrix. For example, let’s define a linear
@@ -180,7 +181,8 @@ y_linear = 2 + 1.5 * x + rnorm(nsim)
 df_linear = data.frame(x = x, y = y_linear)
 
 ggplot() +
-  geom_point(data = df_linear, aes(x = x, y = y))
+  geom_point(data = df_linear, aes(x = x, y = y)) +
+  theme_tufte()
 ```
 
 ![](Readme_files/unnamed-chunk-6-1.png)<!-- -->
@@ -202,12 +204,14 @@ df_plot = data.frame(
   y = c(pred_nonlinear, pred_full),
   type = rep(c("Non linear effect", "Full effect"), each = length(x)))
 
-gg_without_linear = ggplot() +
+ggplot() +
   geom_point(data = data.frame(x = x, y = y_linear), aes(x = x, y = y)) +
   geom_line(data = df_plot, aes(x = x, y = y, color = type)) +
   theme_tufte() +
   scale_color_brewer(palette = "Set1")
 ```
+
+![](Readme_files/unnamed-chunk-7-1.png)<!-- -->
 
 If we use the non-linear effect from the first examples, we observe that
 both, the reduced and full design matrix can capture the non-linear
@@ -249,13 +253,13 @@ on this information:
 bins = binVectorCustom(x, 50)
 idx = calculateIndexVector(x, bins) + 1 # Note the shift from C++ to R in indexing
 head(data.frame(x = x, bins = bins[idx]))
-#>             x        bins
-#> 1 0.003080335 0.003080335
-#> 2 0.009320069 0.003080335
-#> 3 0.127797278 0.206259869
-#> 4 0.318968755 0.409439402
-#> 5 0.398136617 0.409439402
-#> 6 0.445701538 0.409439402
+#>         x    bins
+#> 1 0.02933 0.02933
+#> 2 0.21807 0.23274
+#> 3 0.29906 0.23274
+#> 4 0.32377 0.23274
+#> 5 0.41275 0.43615
+#> 6 0.51136 0.43615
 ```
 
 For spline regression, we can build the basis just using the bins and
