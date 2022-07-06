@@ -49,19 +49,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.16667 0.00728 0.00342 0 0 ...
+#>  num [1:100, 1:24] 1.67e-01 1.43e-01 3.70e-02 8.17e-05 2.46e-06 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 0 1 2 3 4 5 6 ...
-#>   ..@ p       : int [1:25] 0 3 10 24 42 63 87 110 130 154 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 0 1 2 3 4 ...
+#>   ..@ p       : int [1:25] 0 5 16 30 49 66 82 102 122 143 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.16667 0.00728 0.00342 0.66667 0.38296 ...
+#>   ..@ x       : num [1:398] 1.67e-01 1.43e-01 3.70e-02 8.17e-05 2.46e-06 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -141,9 +141,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 58987214677
+#> [1] 23176230227
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 400.4572
+#> [1] 432.6559
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -251,13 +251,13 @@ bins = binVectorCustom(x, 30)
 idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
-#>            x       bins
-#> 1 0.05403692 0.05403692
-#> 2 0.35810175 0.39394676
-#> 3 0.39497409 0.39394676
-#> 4 0.57177026 0.73385660
-#> 5 0.61706966 0.73385660
-#> 6 0.79349607 0.73385660
+#>           x      bins
+#> 1 0.1047224 0.1047224
+#> 2 0.1279476 0.1047224
+#> 3 0.2899030 0.4445807
+#> 4 0.5370377 0.4445807
+#> 5 0.5625368 0.4445807
+#> 6 0.7144071 0.7844391
 ```
 
 For spline regression, we can build the basis just using the bins and
