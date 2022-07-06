@@ -49,19 +49,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.16667 0.15486 0.03907 0.00463 0 ...
+#>  num [1:100, 1:24] 0.1667 0.0973 0.065 0.0466 0.0227 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-#>   ..@ i       : int [1:398] 0 1 2 3 0 1 2 3 4 5 ...
-#>   ..@ p       : int [1:25] 0 4 11 20 31 45 63 84 108 132 ...
+#>   ..@ i       : int [1:398] 0 1 2 3 4 5 6 7 8 0 ...
+#>   ..@ p       : int [1:25] 0 9 22 38 62 83 103 127 146 165 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.16667 0.15486 0.03907 0.00463 0.66667 ...
+#>   ..@ x       : num [1:398] 0.1667 0.0973 0.065 0.0466 0.0227 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -141,9 +141,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 48272222278
+#> [1] 65198270252
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 414.5665
+#> [1] 427.4449
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -251,13 +251,13 @@ bins = binVectorCustom(x, 30)
 idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
-#>            x      bins
-#> 1 0.01340440 0.0134044
-#> 2 0.02483892 0.0134044
-#> 3 0.19459904 0.3556190
-#> 4 0.34288237 0.3556190
-#> 5 0.51974883 0.3556190
-#> 6 0.87112627 1.0400482
+#>            x       bins
+#> 1 0.07269767 0.07269767
+#> 2 0.14946890 0.07269767
+#> 3 0.19851452 0.07269767
+#> 4 0.23452271 0.07269767
+#> 5 0.29975144 0.41111795
+#> 6 0.32868523 0.41111795
 ```
 
 For spline regression, we can build the basis just using the bins and
