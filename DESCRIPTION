@@ -25,6 +25,5 @@ LinkingTo:
     BH
 Suggests:
     testthat,
-    knitr,
-    mboost
+    knitr
 VignetteBuilder: knitr
