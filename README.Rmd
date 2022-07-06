@@ -14,7 +14,7 @@ options(width = 100)
 devtools::install(quite = TRUE, upgrade = "always")
 ```
 
-[![R-CMD-check](https://github.com/schalkdaniel/compboostSplines/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schalkdaniel/compboostSplines/actions/workflows/R-CMD-check.yaml) [![codecov](https://codecov.io/gh/schalkdaniel/compboostSplines/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/compboostSplines) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![R-CMD-check](https://github.com/schalkdaniel/cpsp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schalkdaniel/cpsp/actions/workflows/R-CMD-check.yaml) [![codecov](https://codecov.io/gh/schalkdaniel/cpsp/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/cpsp) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
 ## C++ Spline Implementation
 
@@ -27,7 +27,7 @@ The `pcsp` (__former `compboostSplines`__) package provides a pure spline implem
 #### Developer version:
 
 ```{r, eval=FALSE}
-devtools::install_github("schalkdaniel/compboostSplines")
+remotes::install_github("schalkdaniel/cpsp", ref = "main")
 ```
 
 ## Examples
@@ -36,7 +36,7 @@ devtools::install_github("schalkdaniel/compboostSplines")
 
 To create a spline basis call `createSplineBasis()` (for dense matrices) and `createSparseSplineBasis()` (for sparse matrices):
 ```{r}
-library(compboostSplines)
+library(cpsp)
 
 nsim = 100
 
