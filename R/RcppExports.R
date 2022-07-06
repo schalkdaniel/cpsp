@@ -30,7 +30,7 @@
 #' binnedMatMult(X = X, k = k-1, w = 1)
 #' @export
 binnedMatMult <- function(X, k, w, use_fast_acc = FALSE) {
-    .Call(`_compboostSplines_binnedMatMult`, X, k, w, use_fast_acc)
+    .Call(`_cpsp_binnedMatMult`, X, k, w, use_fast_acc)
 }
 
 #' Calculating binned matrix product for response term
@@ -64,7 +64,7 @@ binnedMatMult <- function(X, k, w, use_fast_acc = FALSE) {
 #' binnedMatMultResponse(X = X, y = y, k = k-1, w = 1)
 #' @export
 binnedMatMultResponse <- function(X, y, k, w) {
-    .Call(`_compboostSplines_binnedMatMultResponse`, X, y, k, w)
+    .Call(`_cpsp_binnedMatMultResponse`, X, y, k, w)
 }
 
 #' Calculating sparse binned matrix product
@@ -94,7 +94,7 @@ binnedMatMultResponse <- function(X, y, k, w) {
 #' binnedMatMult(X = X, k = k-1, w = 1)
 #' @export
 binnedSparseMatMult <- function(X, k, w) {
-    .Call(`_compboostSplines_binnedSparseMatMult`, X, k, w)
+    .Call(`_cpsp_binnedSparseMatMult`, X, k, w)
 }
 
 #' Calculating binned matrix product for response term for sparse matrices
@@ -128,7 +128,7 @@ binnedSparseMatMult <- function(X, k, w) {
 #' binnedMatMultResponse(X = X, y = y, k = k-1, w = 1)
 #' @export
 binnedSparseMatMultResponse <- function(X, y, k, w) {
-    .Call(`_compboostSplines_binnedSparseMatMultResponse`, X, y, k, w)
+    .Call(`_cpsp_binnedSparseMatMultResponse`, X, y, k, w)
 }
 
 #' Calculate vector of bins of specific size
@@ -145,7 +145,7 @@ binnedSparseMatMultResponse <- function(X, y, k, w) {
 #' binVectorCustom(x, 10)
 #' @export
 binVectorCustom <- function(x, n_bins) {
-    .Call(`_compboostSplines_binVectorCustom`, x, n_bins)
+    .Call(`_cpsp_binVectorCustom`, x, n_bins)
 }
 
 #' Calculate vector of bins
@@ -160,7 +160,7 @@ binVectorCustom <- function(x, n_bins) {
 #' binVector(x)
 #' @export
 binVector <- function(x) {
-    .Call(`_compboostSplines_binVector`, x)
+    .Call(`_cpsp_binVector`, x)
 }
 
 #' Calculate index vector for binned vector
@@ -179,7 +179,7 @@ binVector <- function(x) {
 #' head(data.frame(x = x, bins = bins[idx + 1]))
 #' @export
 calculateIndexVector <- function(x, x_bins) {
-    .Call(`_compboostSplines_calculateIndexVector`, x, x_bins)
+    .Call(`_cpsp_calculateIndexVector`, x, x_bins)
 }
 
 #' Subtract the basis of one matrix of another
@@ -198,7 +198,7 @@ calculateIndexVector <- function(x, x_bins) {
 #' getSubtractionRotation(X1, X2)
 #' @export
 getSubtractionRotation <- function(X1, X2) {
-    .Call(`_compboostSplines_getSubtractionRotation`, X1, X2)
+    .Call(`_cpsp_getSubtractionRotation`, X1, X2)
 }
 
 #' Transform degrees of freedom to lambda
@@ -223,7 +223,7 @@ getSubtractionRotation <- function(X1, X2) {
 #' demmlerReinsch(XtX, pen, 2)
 #' @export
 demmlerReinsch <- function(XtX, penalty_mat, degrees_of_freedom) {
-    .Call(`_compboostSplines_demmlerReinsch`, XtX, penalty_mat, degrees_of_freedom)
+    .Call(`_cpsp_demmlerReinsch`, XtX, penalty_mat, degrees_of_freedom)
 }
 
 #' Calculating penalty matrix
@@ -241,7 +241,7 @@ demmlerReinsch <- function(XtX, penalty_mat, degrees_of_freedom) {
 #' pen = penaltyMat(10, 2)
 #' @export
 penaltyMat <- function(nparams, differences) {
-    .Call(`_compboostSplines_penaltyMat`, nparams, differences)
+    .Call(`_cpsp_penaltyMat`, nparams, differences)
 }
 
 #' Binary search to find index of given point within knots
@@ -265,7 +265,7 @@ penaltyMat <- function(nparams, differences) {
 #' findSpan(10, knots)
 #' @export
 findSpan <- function(x, knots) {
-    .Call(`_compboostSplines_findSpan`, x, knots)
+    .Call(`_cpsp_findSpan`, x, knots)
 }
 
 #' Create knots for a specific number, degree and values
@@ -289,7 +289,7 @@ findSpan <- function(x, knots) {
 #' knots = createKnots(values = x, n_knots = 7, degree = 3)
 #' @export
 createKnots <- function(values, n_knots, degree) {
-    .Call(`_compboostSplines_createKnots`, values, n_knots, degree)
+    .Call(`_cpsp_createKnots`, values, n_knots, degree)
 }
 
 #' Transformation from a vector of input points to dense matrix of basis
@@ -315,7 +315,7 @@ createKnots <- function(values, n_knots, degree) {
 #' basis = createSplineBasis(values = x, degree = 3, knots = knots)
 #' @export
 createSplineBasis <- function(values, degree, knots) {
-    .Call(`_compboostSplines_createSplineBasis`, values, degree, knots)
+    .Call(`_cpsp_createSplineBasis`, values, degree, knots)
 }
 
 #' Transformation from a vector of input points to sparse matrix of basis
@@ -341,7 +341,7 @@ createSplineBasis <- function(values, degree, knots) {
 #' basis = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 #' @export
 createSparseSplineBasis <- function(values, degree, knots) {
-    .Call(`_compboostSplines_createSparseSplineBasis`, values, degree, knots)
+    .Call(`_cpsp_createSparseSplineBasis`, values, degree, knots)
 }
 
 #' Calculating row wise tensor product
@@ -358,7 +358,7 @@ createSparseSplineBasis <- function(values, degree, knots) {
 #' pen = penaltyMat(10, 2)
 #' @export
 rowWiseTensor <- function(A, B) {
-    .Call(`_compboostSplines_rowWiseTensor`, A, B)
+    .Call(`_cpsp_rowWiseTensor`, A, B)
 }
 
 #' Calculating row wise tensor product for sparse matrices
@@ -375,6 +375,6 @@ rowWiseTensor <- function(A, B) {
 #' pen = penaltyMat(10, 2)
 #' @export
 rowWiseTensorSparse <- function(A, B) {
-    .Call(`_compboostSplines_rowWiseTensorSparse`, A, B)
+    .Call(`_cpsp_rowWiseTensorSparse`, A, B)
 }
 

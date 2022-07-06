@@ -1,11 +1,15 @@
-Package: compboostSplines
+Package: cpsp
 Type: Package
-Title: C++ Spline Implementation of compboost
+Title: C++ Spline Implementation
 Version: 0.1
 Authors@R: person("Daniel", "Schalk", email = "daniel.schalk@stat.uni-muenchen.de", role = c("aut", "cre"))
 Maintainer: Daniel Schalk <daniel.schalk@stat.uni-muenchen.de>
-Description: A C++ implementation of splines that are also used in compboost. The purpose of this package is just
-  to provide the spline functionality through a lightweighted package.
+Description: A lightweighted pure C++ splines implementation that can be used
+  for spline regression. The package covers several aspects that makes modelling
+  of non-parametric effects much easier. The functionality contains the basis
+  creation, the Demmler-Reinsch-Orthogonalization, building tensor products,
+  an efficient discretization technique to save memory, as well as a method
+  to subtract matrix bases.
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true

@@ -16,9 +16,9 @@ devtools::install(quite = TRUE, upgrade = "always")
 
 [![R-CMD-check](https://github.com/schalkdaniel/compboostSplines/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/schalkdaniel/compboostSplines/actions/workflows/R-CMD-check.yaml) [![codecov](https://codecov.io/gh/schalkdaniel/compboostSplines/branch/main/graph/badge.svg?token=KGR22VAOHI)](https://codecov.io/gh/schalkdaniel/compboostSplines) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
-## C++ Spline Implementation of Compboost
+## C++ Spline Implementation
 
-Pure spline implementation of [compboost](https://compboost.org). This repository can be used for spline regression and non-parametric modelling of numerical features. The functionality contains the basis creation, the Demmler-Reinsch-Orthogonalization, as well as a method to subtract matrix bases.
+The `pcsp` (__former `compboostSplines`__) package provides a pure spline implementation written in `C++`. This repository can be used for spline regression and non-parametric modelling of numerical features. The functionality contains the basis creation, the Demmler-Reinsch-Orthogonalization, building tensor products, an efficient discretization technique to save memory, as well as a method to subtract matrix bases.
 
 **Feel free to extend the algorithms, improve performance, or use for your own projets.**
 
@@ -31,12 +31,6 @@ devtools::install_github("schalkdaniel/compboostSplines")
 ```
 
 ## Examples
-
-<!--
-- [Spline basis](#spline-basis)
-- [Spline regression](#spline-regression)
-- [Demmler-Reinsch-Orthogonalization](#demmler-reinsch-orthogonalization)
--->
 
 ### Spline basis
 

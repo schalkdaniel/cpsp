@@ -13,7 +13,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // binnedMatMult
 arma::mat binnedMatMult(const arma::mat& X, const arma::uvec& k, const arma::vec& w, const bool use_fast_acc);
-RcppExport SEXP _compboostSplines_binnedMatMult(SEXP XSEXP, SEXP kSEXP, SEXP wSEXP, SEXP use_fast_accSEXP) {
+RcppExport SEXP _cpsp_binnedMatMult(SEXP XSEXP, SEXP kSEXP, SEXP wSEXP, SEXP use_fast_accSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -27,7 +27,7 @@ END_RCPP
 }
 // binnedMatMultResponse
 arma::mat binnedMatMultResponse(const arma::mat& X, const arma::vec& y, const arma::uvec& k, const arma::vec& w);
-RcppExport SEXP _compboostSplines_binnedMatMultResponse(SEXP XSEXP, SEXP ySEXP, SEXP kSEXP, SEXP wSEXP) {
+RcppExport SEXP _cpsp_binnedMatMultResponse(SEXP XSEXP, SEXP ySEXP, SEXP kSEXP, SEXP wSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -41,7 +41,7 @@ END_RCPP
 }
 // binnedSparseMatMult
 arma::mat binnedSparseMatMult(const arma::sp_mat& X, const arma::uvec& k, const arma::vec& w);
-RcppExport SEXP _compboostSplines_binnedSparseMatMult(SEXP XSEXP, SEXP kSEXP, SEXP wSEXP) {
+RcppExport SEXP _cpsp_binnedSparseMatMult(SEXP XSEXP, SEXP kSEXP, SEXP wSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -54,7 +54,7 @@ END_RCPP
 }
 // binnedSparseMatMultResponse
 arma::mat binnedSparseMatMultResponse(const arma::sp_mat& X, const arma::vec& y, const arma::uvec& k, const arma::vec& w);
-RcppExport SEXP _compboostSplines_binnedSparseMatMultResponse(SEXP XSEXP, SEXP ySEXP, SEXP kSEXP, SEXP wSEXP) {
+RcppExport SEXP _cpsp_binnedSparseMatMultResponse(SEXP XSEXP, SEXP ySEXP, SEXP kSEXP, SEXP wSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -68,7 +68,7 @@ END_RCPP
 }
 // binVectorCustom
 arma::vec binVectorCustom(const arma::vec& x, const unsigned int n_bins);
-RcppExport SEXP _compboostSplines_binVectorCustom(SEXP xSEXP, SEXP n_binsSEXP) {
+RcppExport SEXP _cpsp_binVectorCustom(SEXP xSEXP, SEXP n_binsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -80,7 +80,7 @@ END_RCPP
 }
 // binVector
 arma::vec binVector(const arma::vec& x);
-RcppExport SEXP _compboostSplines_binVector(SEXP xSEXP) {
+RcppExport SEXP _cpsp_binVector(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -91,7 +91,7 @@ END_RCPP
 }
 // calculateIndexVector
 arma::uvec calculateIndexVector(const arma::vec& x, const arma::vec& x_bins);
-RcppExport SEXP _compboostSplines_calculateIndexVector(SEXP xSEXP, SEXP x_binsSEXP) {
+RcppExport SEXP _cpsp_calculateIndexVector(SEXP xSEXP, SEXP x_binsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -103,7 +103,7 @@ END_RCPP
 }
 // getSubtractionRotation
 arma::mat getSubtractionRotation(const arma::mat& X1, const arma::mat& X2);
-RcppExport SEXP _compboostSplines_getSubtractionRotation(SEXP X1SEXP, SEXP X2SEXP) {
+RcppExport SEXP _cpsp_getSubtractionRotation(SEXP X1SEXP, SEXP X2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -115,7 +115,7 @@ END_RCPP
 }
 // demmlerReinsch
 double demmlerReinsch(const arma::mat& XtX, const arma::mat& penalty_mat, const double& degrees_of_freedom);
-RcppExport SEXP _compboostSplines_demmlerReinsch(SEXP XtXSEXP, SEXP penalty_matSEXP, SEXP degrees_of_freedomSEXP) {
+RcppExport SEXP _cpsp_demmlerReinsch(SEXP XtXSEXP, SEXP penalty_matSEXP, SEXP degrees_of_freedomSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -128,7 +128,7 @@ END_RCPP
 }
 // penaltyMat
 arma::mat penaltyMat(const unsigned int& nparams, const unsigned int& differences);
-RcppExport SEXP _compboostSplines_penaltyMat(SEXP nparamsSEXP, SEXP differencesSEXP) {
+RcppExport SEXP _cpsp_penaltyMat(SEXP nparamsSEXP, SEXP differencesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -140,7 +140,7 @@ END_RCPP
 }
 // findSpan
 unsigned int findSpan(const double& x, const arma::vec& knots);
-RcppExport SEXP _compboostSplines_findSpan(SEXP xSEXP, SEXP knotsSEXP) {
+RcppExport SEXP _cpsp_findSpan(SEXP xSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -152,7 +152,7 @@ END_RCPP
 }
 // createKnots
 arma::vec createKnots(const arma::vec& values, const unsigned int& n_knots, const unsigned int& degree);
-RcppExport SEXP _compboostSplines_createKnots(SEXP valuesSEXP, SEXP n_knotsSEXP, SEXP degreeSEXP) {
+RcppExport SEXP _cpsp_createKnots(SEXP valuesSEXP, SEXP n_knotsSEXP, SEXP degreeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -165,7 +165,7 @@ END_RCPP
 }
 // createSplineBasis
 arma::mat createSplineBasis(const arma::vec& values, const unsigned int& degree, const arma::vec& knots);
-RcppExport SEXP _compboostSplines_createSplineBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
+RcppExport SEXP _cpsp_createSplineBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -178,7 +178,7 @@ END_RCPP
 }
 // createSparseSplineBasis
 arma::sp_mat createSparseSplineBasis(arma::vec& values, const unsigned int& degree, const arma::vec& knots);
-RcppExport SEXP _compboostSplines_createSparseSplineBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
+RcppExport SEXP _cpsp_createSparseSplineBasis(SEXP valuesSEXP, SEXP degreeSEXP, SEXP knotsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -191,7 +191,7 @@ END_RCPP
 }
 // rowWiseTensor
 arma::mat rowWiseTensor(const arma::mat& A, const arma::mat& B);
-RcppExport SEXP _compboostSplines_rowWiseTensor(SEXP ASEXP, SEXP BSEXP) {
+RcppExport SEXP _cpsp_rowWiseTensor(SEXP ASEXP, SEXP BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -203,7 +203,7 @@ END_RCPP
 }
 // rowWiseTensorSparse
 arma::sp_mat rowWiseTensorSparse(const arma::sp_mat& A, const arma::sp_mat& B);
-RcppExport SEXP _compboostSplines_rowWiseTensorSparse(SEXP ASEXP, SEXP BSEXP) {
+RcppExport SEXP _cpsp_rowWiseTensorSparse(SEXP ASEXP, SEXP BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -215,26 +215,26 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_compboostSplines_binnedMatMult", (DL_FUNC) &_compboostSplines_binnedMatMult, 4},
-    {"_compboostSplines_binnedMatMultResponse", (DL_FUNC) &_compboostSplines_binnedMatMultResponse, 4},
-    {"_compboostSplines_binnedSparseMatMult", (DL_FUNC) &_compboostSplines_binnedSparseMatMult, 3},
-    {"_compboostSplines_binnedSparseMatMultResponse", (DL_FUNC) &_compboostSplines_binnedSparseMatMultResponse, 4},
-    {"_compboostSplines_binVectorCustom", (DL_FUNC) &_compboostSplines_binVectorCustom, 2},
-    {"_compboostSplines_binVector", (DL_FUNC) &_compboostSplines_binVector, 1},
-    {"_compboostSplines_calculateIndexVector", (DL_FUNC) &_compboostSplines_calculateIndexVector, 2},
-    {"_compboostSplines_getSubtractionRotation", (DL_FUNC) &_compboostSplines_getSubtractionRotation, 2},
-    {"_compboostSplines_demmlerReinsch", (DL_FUNC) &_compboostSplines_demmlerReinsch, 3},
-    {"_compboostSplines_penaltyMat", (DL_FUNC) &_compboostSplines_penaltyMat, 2},
-    {"_compboostSplines_findSpan", (DL_FUNC) &_compboostSplines_findSpan, 2},
-    {"_compboostSplines_createKnots", (DL_FUNC) &_compboostSplines_createKnots, 3},
-    {"_compboostSplines_createSplineBasis", (DL_FUNC) &_compboostSplines_createSplineBasis, 3},
-    {"_compboostSplines_createSparseSplineBasis", (DL_FUNC) &_compboostSplines_createSparseSplineBasis, 3},
-    {"_compboostSplines_rowWiseTensor", (DL_FUNC) &_compboostSplines_rowWiseTensor, 2},
-    {"_compboostSplines_rowWiseTensorSparse", (DL_FUNC) &_compboostSplines_rowWiseTensorSparse, 2},
+    {"_cpsp_binnedMatMult", (DL_FUNC) &_cpsp_binnedMatMult, 4},
+    {"_cpsp_binnedMatMultResponse", (DL_FUNC) &_cpsp_binnedMatMultResponse, 4},
+    {"_cpsp_binnedSparseMatMult", (DL_FUNC) &_cpsp_binnedSparseMatMult, 3},
+    {"_cpsp_binnedSparseMatMultResponse", (DL_FUNC) &_cpsp_binnedSparseMatMultResponse, 4},
+    {"_cpsp_binVectorCustom", (DL_FUNC) &_cpsp_binVectorCustom, 2},
+    {"_cpsp_binVector", (DL_FUNC) &_cpsp_binVector, 1},
+    {"_cpsp_calculateIndexVector", (DL_FUNC) &_cpsp_calculateIndexVector, 2},
+    {"_cpsp_getSubtractionRotation", (DL_FUNC) &_cpsp_getSubtractionRotation, 2},
+    {"_cpsp_demmlerReinsch", (DL_FUNC) &_cpsp_demmlerReinsch, 3},
+    {"_cpsp_penaltyMat", (DL_FUNC) &_cpsp_penaltyMat, 2},
+    {"_cpsp_findSpan", (DL_FUNC) &_cpsp_findSpan, 2},
+    {"_cpsp_createKnots", (DL_FUNC) &_cpsp_createKnots, 3},
+    {"_cpsp_createSplineBasis", (DL_FUNC) &_cpsp_createSplineBasis, 3},
+    {"_cpsp_createSparseSplineBasis", (DL_FUNC) &_cpsp_createSparseSplineBasis, 3},
+    {"_cpsp_rowWiseTensor", (DL_FUNC) &_cpsp_rowWiseTensor, 2},
+    {"_cpsp_rowWiseTensorSparse", (DL_FUNC) &_cpsp_rowWiseTensorSparse, 2},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_compboostSplines(DllInfo *dll) {
+RcppExport void R_init_cpsp(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

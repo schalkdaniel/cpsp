@@ -1,4 +1,4 @@
-#' @useDynLib compboostSplines, .registration = TRUE
+#' @useDynLib cpsp, .registration = TRUE
 NULL
 
 #' @import Rcpp
