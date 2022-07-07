@@ -1,7 +1,7 @@
 Package: cpsp
 Type: Package
 Title: C++ Spline Implementation
-Version: 0.1
+Version: 0.1.1
 Authors@R: person("Daniel", "Schalk", email = "daniel.schalk@stat.uni-muenchen.de", role = c("aut", "cre"))
 Maintainer: Daniel Schalk <daniel.schalk@stat.uni-muenchen.de>
 Description: A lightweighted pure C++ splines implementation that can be used
