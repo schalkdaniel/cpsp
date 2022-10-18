@@ -11,3 +11,4 @@ temp/*
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 ^\.github$
+^cran-comments\.md$
