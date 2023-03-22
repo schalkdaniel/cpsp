@@ -49,19 +49,19 @@ knots = createKnots(values = x, n_knots = 20, degree = 3)
 # Create basis using that knots:
 basis = createSplineBasis(values = x, degree = 3, knots = knots)
 str(basis)
-#>  num [1:100, 1:24] 0.16667 0.10892 0.0521 0.03354 0.00265 ...
+#>  num [1:100, 1:24] 0.1667 0.0576 0.0426 0.0276 0.0197 ...
 
 # You can also create sparse matrices:
 basis_sparse = createSparseSplineBasis(values = x, degree = 3, knots = knots)
 str(basis_sparse)
 #> Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
 #>   ..@ i       : int [1:398] 0 1 2 3 4 5 6 0 1 2 ...
-#>   ..@ p       : int [1:25] 0 7 16 29 45 65 86 110 133 151 ...
+#>   ..@ p       : int [1:25] 0 7 19 36 55 70 81 92 105 119 ...
 #>   ..@ Dim     : int [1:2] 100 24
 #>   ..@ Dimnames:List of 2
 #>   .. ..$ : NULL
 #>   .. ..$ : NULL
-#>   ..@ x       : num [1:398] 0.16667 0.10892 0.0521 0.03354 0.00265 ...
+#>   ..@ x       : num [1:398] 0.1667 0.0576 0.0426 0.0276 0.0197 ...
 #>   ..@ factors : list()
 
 # Check if row sums add up to 1:
@@ -141,9 +141,9 @@ of freedom to a penalty term:
 ``` r
 # We use the basis and penalty matrix from above and specify 2 and 4 degrees of freedom:
 (penalty_df2 = demmlerReinsch(t(basis) %*% basis, K, 2))
-#> [1] 24243581772
+#> [1] 33120256281
 (penalty_df4 = demmlerReinsch(t(basis) %*% basis, K, 4))
-#> [1] 431.3142
+#> [1] 424.091
 
 # This is now used for a new estimator:
 beta_df2 = myEstimator(basis, y, penalty_df2 * K)
@@ -252,12 +252,12 @@ idx = calculateIndexVector(x, bins) + 1
 
 head(data.frame(x = x, bins = bins[idx]))
 #>            x       bins
-#> 1 0.09485081 0.09485081
-#> 2 0.15707090 0.09485081
-#> 3 0.24608684 0.09485081
-#> 4 0.28969674 0.43568317
-#> 5 0.44722891 0.43568317
-#> 6 0.45606204 0.43568317
+#> 1 0.03844522 0.03844522
+#> 2 0.17742340 0.03844522
+#> 3 0.20866135 0.37575717
+#> 4 0.24855209 0.37575717
+#> 5 0.27552756 0.37575717
+#> 6 0.29494582 0.37575717
 ```
 
 For spline regression, we can build the basis just using the bins and
